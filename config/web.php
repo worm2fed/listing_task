@@ -11,6 +11,11 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
+    'modules' => [
+        'orders' => [
+            'class' => 'app\modules\orders\orders',
+        ],
+    ],
     'components' => [
         'i18n' => [
             'translations' => [
@@ -56,14 +61,12 @@ $config = [
             ],
         ],
         'db' => $db,
-        /*
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
             ],
         ],
-        */
     ],
     'params' => $params,
 ];
