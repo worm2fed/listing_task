@@ -16,17 +16,15 @@ class OrdersAsset extends AssetBundle
     }
     
     public $js = [
-        'js/bootstrap.min.js',
-        'js/jquery.min.js',
     ];
     
     public $css = [
-        'css/bootstrap.min.css',
         'css/custom.css',
     ];
     
     public $depends = [
         'yii\web\YiiAsset',
+        'yii\bootstrap\BootstrapPluginAsset',
     ];
 
 }
