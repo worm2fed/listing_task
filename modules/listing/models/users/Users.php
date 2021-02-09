@@ -4,6 +4,8 @@ namespace app\modules\listing\models\users;
 
 use Yii;
 
+use app\modules\listing\models\orders\Orders;
+
 
 /**
  * This is the model class for table "users".
@@ -59,5 +61,13 @@ class Users extends \yii\db\ActiveRecord
     public function getFull_name()
     {
         return $this->first_name . ' ' . $this->last_name;
+    }
+
+    public function getOrders()
+    {
+        return $this->hasMany(
+            Orders::class, 
+            ['user_id' => 'id']
+        )->inverseOf('user');
     }
 }

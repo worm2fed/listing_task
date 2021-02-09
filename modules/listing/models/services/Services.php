@@ -4,6 +4,8 @@ namespace app\modules\listing\models\services;
 
 use Yii;
 
+use app\modules\listing\models\orders\Orders;
+
 
 /**
  * This is the model class for table "services".
@@ -50,5 +52,18 @@ class Services extends \yii\db\ActiveRecord
     public static function find()
     {
         return new ServicesQuery(get_called_class());
+    }
+
+    public function getOrders()
+    {
+        return $this->hasMany(
+            Orders::class, 
+            ['service_id' => 'id']
+        )->inverseOf('service');
+    }
+
+    public function getOrders_count()
+    {
+        return Orders::find()->where(['service_id' => $this->id])->count();
     }
 }

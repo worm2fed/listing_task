@@ -10,7 +10,7 @@ $this->title = Yii::t('listing', 'Orders');
 ?>
 
 <div class="container-fluid">
-  <?= ""#$this->render('_search', ['model' => $searchModel]) ?>
+  <?= $this->render('_search', ['model' => $searchModel]) ?>
 
   <?= GridView::widget([
     'dataProvider' => $dataProvider,
@@ -37,9 +37,9 @@ $this->title = Yii::t('listing', 'Orders');
       'quantity',
       [
         'attribute' => 'service',
-        'content' => function($order) {
+        'content' => function ($order) {
           $service = $order->service;
-          return '<span class="label-id">' . '1' . '</span> ' . $service->name;
+          return '<span class="label-id">' . $service->orders_count . '</span> ' . $service->name;
         },
         'contentOptions' => [
           'class' => 'service',
@@ -51,28 +51,20 @@ $this->title = Yii::t('listing', 'Orders');
           'label' => Orders::instance()->getAttributeLabel('service'),
           'options' => ['class' => 'btn btn-th btn-default dropdown-toggle'],
           'dropdown' => [
-            'items' => [
-                ['label' => 'All (894931)', 'encode' => false, 'url' => '#'],
-                ['label' => '<span class="label-id">214</span> Real Views', 'encode' => false, 'url' => '/'],
-                ['label' => '<span class="label-id">215</span> Page Likes', 'encode' => false, 'url' => '/'],
-                ['label' => '<span class="label-id">10</span> Page Likes', 'encode' => false, 'url' => '/'],
-                ['label' => '<span class="label-id">217</span> Page Likes', 'encode' => false, 'url' => '/'],
-                ['label' => '<span class="label-id">221</span> Followers', 'encode' => false, 'url' => '/'],
-                ['label' => '<span class="label-id">224</span> Groups Join', 'encode' => false, 'url' => '/'],
-                ['label' => '<span class="label-id">230</span> Website Likes', 'encode' => false, 'url' => '/'],
-            ],
+            'encodeLabels' => false,
+            'items' => $services_filter_items,
           ],
         ])
       ],
       [
         'attribute' => 'status',
-        'value' => function($order) {
+        'value' => function ($order) {
           return Orders::statuses()[$order->status];
         },
       ],
       [
         'attribute' => 'mode',
-        'value' => function($order) {
+        'value' => function ($order) {
           return Orders::modes()[$order->mode];
         },
         'headerOptions' => [
@@ -83,26 +75,26 @@ $this->title = Yii::t('listing', 'Orders');
           'options' => ['class' => 'btn btn-th btn-default dropdown-toggle'],
           'dropdown' => [
             'items' => [
-                ['label' => 'All', 'url' => '#'],
-                ['label' => 'Manual', 'url' => '/'],
-                ['label' => 'Auto', 'url' => '/'],
+              ['label' => 'All', 'url' => '#'],
+              ['label' => 'Manual', 'url' => '/'],
+              ['label' => 'Auto', 'url' => '/'],
             ],
           ],
         ])
       ],
       [
         'attribute' => 'created_at',
-        'content' => function($order) {
-            $dt = new DateTime();
-            $dt->setTimestamp($order->created_at);
-            return '<span class="nowrap">' . $dt->format('Y-m-d') . '</span>' . 
-                   '<span class="nowrap">' . $dt->format('H:m:s') . '</span>';
+        'content' => function ($order) {
+          $dt = new DateTime();
+          $dt->setTimestamp($order->created_at);
+          return '<span class="nowrap">' . $dt->format('Y-m-d') . '</span>' .
+            '<span class="nowrap">' . $dt->format('H:m:s') . '</span>';
         }
       ],
     ],
     'tableOptions' => [
       'class' => 'table order-table'
     ],
-    
+
   ]); ?>
 </div>

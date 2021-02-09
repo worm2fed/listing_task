@@ -10,11 +10,6 @@ namespace app\modules\listing\models\services;
  */
 class ServicesQuery extends \yii\db\ActiveQuery
 {
-    /*public function active()
-    {
-        return $this->andWhere('[[status]]=1');
-    }*/
-
     /**
      * {@inheritdoc}
      * @return Services[]|array

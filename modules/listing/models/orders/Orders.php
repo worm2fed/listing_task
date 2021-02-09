@@ -108,4 +108,9 @@ class Orders extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Services::class, ['id' => 'service_id']);
     }
+
+    public static function getTotal_count()
+    {
+        return self::find()->count();
+    }
 }
