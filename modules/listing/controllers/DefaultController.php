@@ -30,6 +30,7 @@ class DefaultController extends Controller
       'dataProvider' => $dataProvider,
       'services_filter_items' => $this->getServicesFilterItems(),
       'statuses_filter_items' => $this->getStatusesFilterItems(),
+      'modes_filter_items'    => $this->getModesFilterItems(),
     ]);
   }
 
@@ -86,5 +87,38 @@ class DefaultController extends Controller
     }
     ArrayHelper::multisort($services_filter_items, 'count', SORT_DESC);
     return $services_filter_items;
+  }
+
+  private function getModesFilterItems()
+  {
+    return [
+      [
+        'label'  => 'All',
+        'url'    => Url::current(['mode' => null]),
+        'options' => [
+          'class' => is_null(Yii::$app->request->get('mode'))
+            ? 'active'
+            : ''
+        ]
+      ],
+      [
+        'label'  => 'Manual',
+        'url'    => Url::current(['mode' => 0]),
+        'options' => [
+          'class' => Yii::$app->request->get('mode') === strval(0)
+            ? 'active'
+            : ''
+        ]
+      ],
+      [
+        'label'  => 'Auto',
+        'url'    => Url::current(['mode' => 1]),
+        'options' => [
+          'class' => Yii::$app->request->get('mode') === strval(1)
+            ? 'active'
+            : ''
+        ]
+      ],
+    ];
   }
 }

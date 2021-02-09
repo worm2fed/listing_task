@@ -77,11 +77,7 @@ $this->title = Yii::t('listing', 'Orders');
           'label' => Orders::instance()->getAttributeLabel('mode'),
           'options' => ['class' => 'btn btn-th btn-default dropdown-toggle'],
           'dropdown' => [
-            'items' => [
-              ['label' => 'All', 'url' => '#'],
-              ['label' => 'Manual', 'url' => '/'],
-              ['label' => 'Auto', 'url' => '/'],
-            ],
+            'items' => $modes_filter_items,
           ],
         ])
       ],
