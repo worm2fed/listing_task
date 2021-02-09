@@ -65,13 +65,23 @@ class DefaultController extends Controller
     $services_filter_items = [
       [
         'label' => 'All (' . Orders::getTotal_count() . ')',
-        'url' => '',
+        'url' => Url::current(['service_id' => null]),
+        'options' => [
+          'class' => is_null(Yii::$app->request->get('service_id'))
+            ? 'active'
+            : ''
+        ]
       ]
     ];
     foreach (Services::find()->all() as $item) {
       array_push($services_filter_items, [
         'label' => '<span class="label-id">' . $item->orders_count . '</span> ' . $item->name,
-        'url'   => '',
+        'url'   => Url::current(['service_id' => $item->id]),
+        'options' => [
+          'class' => Yii::$app->request->get('service_id') === strval($item->id)
+            ? 'active'
+            : ''
+        ]
       ]);
     }
     ArrayHelper::multisort($services_filter_items, 'count', SORT_DESC);
