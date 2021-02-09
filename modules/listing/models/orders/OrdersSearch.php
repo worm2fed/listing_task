@@ -50,6 +50,11 @@ class OrdersSearch extends Orders
             'pagination' => [
                 'pageSize' => 100,
             ],
+            'sort' => [
+                'defaultOrder' => [
+                    'id' => SORT_DESC,
+                ]
+            ],
         ]);
 
         $this->load($params);
