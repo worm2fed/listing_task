@@ -18,8 +18,8 @@ class OrdersSearch extends Orders
     public function rules()
     {
         return [
-            [['id', 'user_id', 'service_id', 'status', 'mode'], 'integer'],
-            [['link'], 'safe'],
+            [['id', 'service_id', 'status', 'mode'], 'integer'],
+            [['link', 'username'], 'safe'],
         ];
     }
 
@@ -43,8 +43,6 @@ class OrdersSearch extends Orders
     {
         $query = Orders::find();
 
-        // add conditions that should always apply here
-
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'pagination' => [
@@ -57,7 +55,7 @@ class OrdersSearch extends Orders
             ],
         ]);
 
-        $this->load($params);
+        $this->load($params, '');
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
@@ -68,13 +66,17 @@ class OrdersSearch extends Orders
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'user_id' => $this->user_id,
             'service_id' => $this->service_id,
             'status' => $this->status,
             'mode' => $this->mode,
         ]);
 
         $query->andFilterWhere(['like', 'link', $this->link]);
+
+        // $query->andWhere(
+        //     'user.first_name LIKE "%' . $this->username . '%" ' .
+        //         'OR user.last_name LIKE "%' . $this->username . '%"'
+        // );
 
         return $dataProvider;
     }

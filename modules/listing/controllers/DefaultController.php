@@ -4,6 +4,7 @@ namespace app\modules\listing\controllers;
 
 use Yii;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
 use yii\web\Controller;
 
 use app\modules\listing\models\services\Services;
@@ -27,11 +28,39 @@ class DefaultController extends Controller
     return $this->render('index', [
       'searchModel' => $searchModel,
       'dataProvider' => $dataProvider,
-      'services_filter_items' => $this->getServicesItems()
+      'services_filter_items' => $this->getServicesFilterItems(),
+      'statuses_filter_items' => $this->getStatusesFilterItems(),
     ]);
   }
 
-  private function getServicesItems()
+  private function getStatusesFilterItems()
+  {
+    $statuses_filter_items = [
+      [
+        'label'  => 'All orders',
+        'url'    => Url::current([
+          'status' => null,
+          'mode' => null,
+          'service' => null
+        ]),
+        'active' => is_null(Yii::$app->request->get('status'))
+      ]
+    ];
+    foreach (Orders::statuses() as $key => $value) {
+      array_push($statuses_filter_items, [
+        'label'  => $value,
+        'url'    => Url::current([
+          'status' => $key,
+          'mode' => null,
+          'service' => null
+        ]),
+        'active' => Yii::$app->request->get('status') === strval($key)
+      ]);
+    }
+    return $statuses_filter_items;
+  }
+
+  private function getServicesFilterItems()
   {
     $services_filter_items = [
       [

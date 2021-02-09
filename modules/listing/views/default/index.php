@@ -10,7 +10,10 @@ $this->title = Yii::t('listing', 'Orders');
 ?>
 
 <div class="container-fluid">
-  <?= $this->render('_search', ['model' => $searchModel]) ?>
+  <?= $this->render('_search', [
+    'model' => $searchModel,
+    'statuses_filter_items' => $statuses_filter_items
+  ]) ?>
 
   <?= GridView::widget([
     'dataProvider' => $dataProvider,
