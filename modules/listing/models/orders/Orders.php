@@ -2,6 +2,9 @@
 
 namespace app\modules\listing\models\orders;
 
+use app\modules\listing\models\services\Services;
+use app\modules\listing\models\users\Users;
+
 use Yii;
 
 
@@ -19,6 +22,34 @@ use Yii;
  */
 class Orders extends \yii\db\ActiveRecord
 {
+    const MODE_MANUAL = 0;
+    const MODE_AUTO   = 1;
+
+    public static function modes()
+    {
+        return [
+            self::MODE_MANUAL => Yii::t('listing', 'Manual'),
+            self::MODE_AUTO   => Yii::t('listing', 'Auto'),
+        ];
+    }
+
+    const STATUS_PENDING     = 0;
+    const STATUS_IN_PROGRESS = 1;
+    const STATUS_COMPLETED   = 2;
+    const STATUS_CANCELED    = 3;
+    const STATUS_FAIL        = 4;
+
+    public static function statuses()
+    {
+        return [
+            self::STATUS_PENDING => Yii::t('listing', 'Pending'),
+            self::STATUS_IN_PROGRESS   => Yii::t('listing', 'In progress'),
+            self::STATUS_COMPLETED   => Yii::t('listing', 'Completed'),
+            self::STATUS_CANCELED   => Yii::t('listing', 'Canceled'),
+            self::STATUS_FAIL   => Yii::t('listing', 'Fail'),
+        ];
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -50,9 +81,12 @@ class Orders extends \yii\db\ActiveRecord
             'link' => Yii::t('listing', 'Link'),
             'quantity' => Yii::t('listing', 'Quantity'),
             'service_id' => Yii::t('listing', 'Service ID'),
-            'status' => Yii::t('listing', '0 - Pending, 1 - In progress, 2 - Completed, 3 - Canceled, 4 - Fail'),
-            'created_at' => Yii::t('listing', 'Created At'),
-            'mode' => Yii::t('listing', '0 - Manual, 1 - Auto'),
+            'status' => Yii::t('listing', 'Status'),
+            'created_at' => Yii::t('listing', 'Created'),
+            'mode' => Yii::t('listing', 'Mode'),
+            
+            'user' => Yii::t('listing', 'User'),
+            'service' => Yii::t('listing', 'Service'),
         ];
     }
 
@@ -63,5 +97,15 @@ class Orders extends \yii\db\ActiveRecord
     public static function find()
     {
         return new OrdersQuery(get_called_class());
+    }
+
+    public function getUser()
+    {
+        return $this->hasOne(Users::class, ['id' => 'user_id']);
+    }
+
+    public function getService()
+    {
+        return $this->hasOne(Services::class, ['id' => 'service_id']);
     }
 }

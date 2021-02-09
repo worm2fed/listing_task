@@ -42,6 +42,8 @@ class Users extends \yii\db\ActiveRecord
             'id' => Yii::t('listing', 'ID'),
             'first_name' => Yii::t('listing', 'First Name'),
             'last_name' => Yii::t('listing', 'Last Name'),
+
+            'full_name' => Yii::t('listing', 'Full Name'),
         ];
     }
 
@@ -52,5 +54,10 @@ class Users extends \yii\db\ActiveRecord
     public static function find()
     {
         return new UsersQuery(get_called_class());
+    }
+
+    public function getFull_name()
+    {
+        return $this->first_name . ' ' . $this->last_name;
     }
 }

@@ -18,7 +18,7 @@ class OrdersSearch extends Orders
     public function rules()
     {
         return [
-            [['id', 'user_id', 'quantity', 'service_id', 'status', 'created_at', 'mode'], 'integer'],
+            [['id', 'user_id', 'service_id', 'status', 'mode'], 'integer'],
             [['link'], 'safe'],
         ];
     }
@@ -47,6 +47,9 @@ class OrdersSearch extends Orders
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => [
+                'pageSize' => 100,
+            ],
         ]);
 
         $this->load($params);
@@ -61,10 +64,8 @@ class OrdersSearch extends Orders
         $query->andFilterWhere([
             'id' => $this->id,
             'user_id' => $this->user_id,
-            'quantity' => $this->quantity,
             'service_id' => $this->service_id,
             'status' => $this->status,
-            'created_at' => $this->created_at,
             'mode' => $this->mode,
         ]);
 
