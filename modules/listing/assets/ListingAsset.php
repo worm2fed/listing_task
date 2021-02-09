@@ -1,13 +1,13 @@
 <?php
 
-namespace app\modules\orders\assets;
+namespace app\modules\listing\assets;
 
 use yii\web\AssetBundle;   
 
 
-class OrdersAsset extends AssetBundle 
+class ListingAsset extends AssetBundle 
 {
-    public $sourcePath = '@app/modules/orders/assets';
+    public $sourcePath = '@app/modules/listing/assets';
 
     public function init()
     {

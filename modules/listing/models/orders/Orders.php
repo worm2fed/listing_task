@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\orders\models;
+namespace app\modules\listing\models\orders;
 
 use Yii;
 
@@ -45,14 +45,14 @@ class Orders extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('orders', 'ID'),
-            'user_id' => Yii::t('orders', 'User ID'),
-            'link' => Yii::t('orders', 'Link'),
-            'quantity' => Yii::t('orders', 'Quantity'),
-            'service_id' => Yii::t('orders', 'Service ID'),
-            'status' => Yii::t('orders', '0 - Pending, 1 - In progress, 2 - Completed, 3 - Canceled, 4 - Fail'),
-            'created_at' => Yii::t('orders', 'Created At'),
-            'mode' => Yii::t('orders', '0 - Manual, 1 - Auto'),
+            'id' => Yii::t('listing', 'ID'),
+            'user_id' => Yii::t('listing', 'User ID'),
+            'link' => Yii::t('listing', 'Link'),
+            'quantity' => Yii::t('listing', 'Quantity'),
+            'service_id' => Yii::t('listing', 'Service ID'),
+            'status' => Yii::t('listing', '0 - Pending, 1 - In progress, 2 - Completed, 3 - Canceled, 4 - Fail'),
+            'created_at' => Yii::t('listing', 'Created At'),
+            'mode' => Yii::t('listing', '0 - Manual, 1 - Auto'),
         ];
     }
 

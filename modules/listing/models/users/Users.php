@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\orders\models;
+namespace app\modules\listing\models\users;
 
 use Yii;
 
@@ -39,9 +39,9 @@ class Users extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('orders', 'ID'),
-            'first_name' => Yii::t('orders', 'First Name'),
-            'last_name' => Yii::t('orders', 'Last Name'),
+            'id' => Yii::t('listing', 'ID'),
+            'first_name' => Yii::t('listing', 'First Name'),
+            'last_name' => Yii::t('listing', 'Last Name'),
         ];
     }
 

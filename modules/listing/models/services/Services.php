@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\orders\models;
+namespace app\modules\listing\models\services;
 
 use Yii;
 
@@ -38,8 +38,8 @@ class Services extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('orders', 'ID'),
-            'name' => Yii::t('orders', 'Name'),
+            'id' => Yii::t('listing', 'ID'),
+            'name' => Yii::t('listing', 'Name'),
         ];
     }
 

@@ -2,9 +2,10 @@
 
 use yii\helpers\Html;
 
-use app\modules\orders\assets\OrdersAsset;
+use app\modules\listing\assets\ListingAsset;
 
-OrdersAsset::register($this);
+
+ListingAsset::register($this);
 
 /* @var $this yii\web\View */
 /* @var $content string */

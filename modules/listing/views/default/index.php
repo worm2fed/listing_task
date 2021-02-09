@@ -1,5 +1,5 @@
 <?php
-$this->title = 'Orders';
+$this->title = Yii::t('listing', 'Orders');
 ?>
 
 <nav class="navbar navbar-fixed-top navbar-default">
@@ -14,7 +14,11 @@ $this->title = 'Orders';
     </div>
     <div class="collapse navbar-collapse" id="bs-navbar-collapse">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Orders</a></li>
+        <li class="active">
+          <a href="#">
+            <?= Yii::t('listing', 'Orders') ?>
+          </a>
+        </li>
       </ul>
     </div>
   </div>

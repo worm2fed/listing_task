@@ -14,8 +14,8 @@ $config = [
         '@npm'   => '@vendor/npm-asset',
     ],
     'modules' => [
-        'orders' => [
-            'class' => 'app\modules\orders\orders',
+        'listing' => [
+            'class' => 'app\modules\listing\listing',
         ],
     ],
     'components' => [
@@ -29,9 +29,9 @@ $config = [
                         'handleMissingTranslation'
                     ]
                 ],
-                'orders*' => [
+                'listing*' => [
                     'class'          => 'yii\i18n\PhpMessageSource',
-                    'basePath'       => '@app/modules/orders/messages',
+                    'basePath'       => '@app/modules/listing/messages',
                     'on missingTranslation' => [
                         'app\components\TranslationEventHandler', 
                         'handleMissingTranslation'
