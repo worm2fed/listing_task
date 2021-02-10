@@ -47,12 +47,12 @@ $grid_columns = [
     },
   ],
   [
-    'attribute' => 'mode',
-    'value'     => function ($order) {
+    'attribute'    => 'mode',
+    'value'        => function ($order) {
       return Orders::modes()[$order->mode];
     },
     'headerOptions' => ['class' => 'dropdown-th'],
-    'header' => ButtonDropdown::widget([
+    'header'        => ButtonDropdown::widget([
       'label'    => Orders::instance()->getAttributeLabel('mode'),
       'options'  => ['class' => 'btn btn-th btn-default dropdown-toggle'],
       'dropdown' => ['items' => $modes_filter_items],

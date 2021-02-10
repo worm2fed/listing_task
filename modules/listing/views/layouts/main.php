@@ -42,15 +42,15 @@ ListingAsset::register($this);
   <?php $this->beginBody() ?>
 
   <?php NavBar::begin([
-    'options' => ['class' => 'navbar navbar-fixed-top navbar-default'],
+    'options'               => ['class' => 'navbar navbar-fixed-top navbar-default'],
     'innerContainerOptions' => ['class' => 'container-fluid'],
   ]) ?>
 
   <?= Nav::widget([
-    'items' => [
+    'items'   => [
       [
-        'label' => Yii::t('listing', 'Orders'),
-        'url'   => ['/listing/default'],
+        'label'  => Yii::t('listing', 'Orders'),
+        'url'    => ['/listing/default'],
         'active' => Yii::$app->controller->id == 'default'
       ],
     ],

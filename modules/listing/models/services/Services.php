@@ -40,7 +40,7 @@ class Services extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('listing', 'ID'),
+            'id'   => Yii::t('listing', 'ID'),
             'name' => Yii::t('listing', 'Name'),
         ];
     }
@@ -57,7 +57,7 @@ class Services extends \yii\db\ActiveRecord
     public function getOrders()
     {
         return $this->hasMany(
-            Orders::class, 
+            Orders::class,
             ['service_id' => 'id']
         )->inverseOf('service');
     }

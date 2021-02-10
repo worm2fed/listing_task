@@ -85,7 +85,9 @@ class OrdersSearch extends Orders
                 case 3:
                     $query->joinWith(['user']);
                     $query->andFilterWhere([
-                        'like', 'CONCAT_WS(" ", users.first_name, users.last_name)', $this->search,
+                        'like',
+                        'CONCAT_WS(" ", users.first_name, users.last_name)',
+                        $this->search,
                     ]);
                     break;
                 default:

@@ -10,11 +10,6 @@ namespace app\modules\listing\models\orders;
  */
 class OrdersQuery extends \yii\db\ActiveQuery
 {
-    /*public function active()
-    {
-        return $this->andWhere('[[status]]=1');
-    }*/
-
     /**
      * {@inheritdoc}
      * @return Orders[]|array

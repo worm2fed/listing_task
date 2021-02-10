@@ -41,11 +41,11 @@ class Users extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('listing', 'ID'),
+            'id'         => Yii::t('listing', 'ID'),
             'first_name' => Yii::t('listing', 'First Name'),
-            'last_name' => Yii::t('listing', 'Last Name'),
+            'last_name'  => Yii::t('listing', 'Last Name'),
 
-            'full_name' => Yii::t('listing', 'Full Name'),
+            'full_name'  => Yii::t('listing', 'Full Name'),
         ];
     }
 
@@ -66,7 +66,7 @@ class Users extends \yii\db\ActiveRecord
     public function getOrders()
     {
         return $this->hasMany(
-            Orders::class, 
+            Orders::class,
             ['user_id' => 'id']
         )->inverseOf('user');
     }

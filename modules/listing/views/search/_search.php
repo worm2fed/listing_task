@@ -22,7 +22,7 @@ use yii\widgets\ActiveForm;
     'search',
     Yii::$app->request->get('search'),
     [
-      'class' => 'form-control',
+      'class'       => 'form-control',
       'placeholder' => Yii::t('listing', 'Search orders')
     ]
   ) ?>
@@ -43,7 +43,7 @@ use yii\widgets\ActiveForm;
 
     <?= Html::submitButton(
       Html::tag('span', '', [
-        'class' => 'glyphicon glyphicon-search',
+        'class'       => 'glyphicon glyphicon-search',
         'aria-hidden' => 'true'
       ]),
       ['class' => 'btn btn-default']

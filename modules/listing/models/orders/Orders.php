@@ -42,11 +42,11 @@ class Orders extends \yii\db\ActiveRecord
     public static function statuses()
     {
         return [
-            self::STATUS_PENDING => Yii::t('listing', 'Pending'),
-            self::STATUS_IN_PROGRESS   => Yii::t('listing', 'In progress'),
+            self::STATUS_PENDING     => Yii::t('listing', 'Pending'),
+            self::STATUS_IN_PROGRESS => Yii::t('listing', 'In progress'),
             self::STATUS_COMPLETED   => Yii::t('listing', 'Completed'),
-            self::STATUS_CANCELED   => Yii::t('listing', 'Canceled'),
-            self::STATUS_FAIL   => Yii::t('listing', 'Fail'),
+            self::STATUS_CANCELED    => Yii::t('listing', 'Canceled'),
+            self::STATUS_FAIL        => Yii::t('listing', 'Fail'),
         ];
     }
 
@@ -76,17 +76,17 @@ class Orders extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('listing', 'ID'),
-            'user_id' => Yii::t('listing', 'User ID'),
-            'link' => Yii::t('listing', 'Link'),
-            'quantity' => Yii::t('listing', 'Quantity'),
+            'id'         => Yii::t('listing', 'ID'),
+            'user_id'    => Yii::t('listing', 'User ID'),
+            'link'       => Yii::t('listing', 'Link'),
+            'quantity'   => Yii::t('listing', 'Quantity'),
             'service_id' => Yii::t('listing', 'Service ID'),
-            'status' => Yii::t('listing', 'Status'),
+            'status'     => Yii::t('listing', 'Status'),
             'created_at' => Yii::t('listing', 'Created'),
-            'mode' => Yii::t('listing', 'Mode'),
-            
-            'user' => Yii::t('listing', 'User'),
-            'service' => Yii::t('listing', 'Service'),
+            'mode'       => Yii::t('listing', 'Mode'),
+
+            'user'       => Yii::t('listing', 'User'),
+            'service'    => Yii::t('listing', 'Service'),
         ];
     }
 
