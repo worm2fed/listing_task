@@ -2,17 +2,31 @@
 
 use yii\bootstrap\ButtonDropdown;
 use yii\grid\GridView;
+use yii\widgets\Menu;
 
 use app\modules\listing\models\orders\Orders;
+use app\modules\listing\components\SearchWidget;
 
 
 $this->title = Yii::t('listing', 'Orders');
 ?>
 
 <div class="container-fluid">
-  <?= $this->render('_search', [
-    'model' => $searchModel,
-    'statuses_filter_items' => $statuses_filter_items
+  <?= Menu::widget([
+    'options' => ['class' => 'nav nav-tabs p-b'],
+    'items' => array_merge(
+      $statuses_filter_items,
+      [[
+        'label' => SearchWidget::widget([
+          'model'  => $searchModel,
+          'action' => 'listing',
+          'method' => 'get',
+        ]),
+        'options' => ['class' => 'pull-right custom-search'],
+        'template' => '{label}',
+        'encode'  => false
+      ]]
+    )
   ]) ?>
 
   <?= GridView::widget([
