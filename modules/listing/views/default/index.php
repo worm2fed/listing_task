@@ -12,7 +12,7 @@ use kartik\export\ExportMenu;
 
 
 $this->title = Yii::t('listing', 'Orders');
-$gridColumns = [
+$grid_columns = [
   'id',
   [
     'attribute' => 'user',
@@ -68,6 +68,33 @@ $gridColumns = [
     }
   ],
 ];
+$export_widget = ExportMenu::widget([
+  'dataProvider'     => $dataProvider,
+  'columns'          => $grid_columns,
+  'target'           => ExportMenu::TARGET_BLANK,
+  'asDropdown'       => false,
+  'showConfirmAlert' => false,
+  'filename'         => 'orders-export',
+  'exportConfig'     => [
+    ExportMenu::FORMAT_HTML     => false,
+    ExportMenu::FORMAT_TEXT     => false,
+    ExportMenu::FORMAT_PDF      => false,
+    ExportMenu::FORMAT_EXCEL    => false,
+    ExportMenu::FORMAT_EXCEL_X  => false,
+    ExportMenu::FORMAT_CSV      => [
+      'label'     => Yii::t('listing', 'Save result'),
+      'icon'      => null,
+      'mime'      => 'application/csv',
+      'extension' => 'csv',
+      'writer'    => ExportMenu::FORMAT_CSV,
+      'options'   => [
+        'title' => null,
+        'tag'   => 'span',
+        'class' => 'pull-right'
+      ]
+    ]
+  ],
+]);
 ?>
 
 <div class="container-fluid">
@@ -94,39 +121,14 @@ $gridColumns = [
     'layout'         => '{items}
       <div class="row">
         <div class="col-sm-8">{pager}</div> 
-        <div class="col-sm-4 pagination-counters">{summary}</div>
+        <div class="col-sm-4 pagination-counters">
+          {summary}<br>' . $export_widget . '
+        </div>
       </div>',
     'summary'        => '{begin} to {end} of {totalCount}',
     'filterPosition' => null,
-    'columns'        => $gridColumns,
+    'columns'        => $grid_columns,
     'tableOptions'   => ['class' => 'table order-table']
   ]); ?>
 
-  <?= ExportMenu::widget([
-    'dataProvider'     => $dataProvider,
-    'columns'          => $gridColumns,
-    'target'           => ExportMenu::TARGET_BLANK,
-    'asDropdown'       => false,
-    'showConfirmAlert' => false,
-    'filename'         => 'orders-export',
-    'exportConfig'     => [
-      ExportMenu::FORMAT_HTML     => false,
-      ExportMenu::FORMAT_TEXT     => false,
-      ExportMenu::FORMAT_PDF      => false,
-      ExportMenu::FORMAT_EXCEL    => false,
-      ExportMenu::FORMAT_EXCEL_X  => false,
-      ExportMenu::FORMAT_CSV      => [
-        'label'     => Yii::t('listing', 'Save result'),
-        'icon'      => null,
-        'mime'      => 'application/csv',
-        'extension' => 'csv',
-        'writer'    => ExportMenu::FORMAT_CSV,
-        'options'   => [
-          'title' => null,
-          'tag'   => 'span',
-          'class' => 'pull-right'
-        ]
-      ]
-    ],
-  ]) ?>
 </div>
