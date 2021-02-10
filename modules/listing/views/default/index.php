@@ -2,13 +2,20 @@
 
 use yii\bootstrap\ButtonDropdown;
 use yii\grid\GridView;
-use yii\helpers\Url;
 use yii\widgets\Menu;
 
 use app\modules\listing\models\orders\Orders;
 use app\modules\listing\components\SearchWidget;
 
 use kartik\export\ExportMenu;
+
+
+/* @var $this yii\web\View */
+/* @var $searchModel app\modules\orders\models\OrdersSearch */
+/* @var $dataProvider \yii\data\ActiveDataProvider */
+/* @var $statuses_filter_items array */
+/* @var $services_filter_items array */
+/* @var $modes_filter_items array */
 
 
 $this->title = Yii::t('listing', 'Orders');

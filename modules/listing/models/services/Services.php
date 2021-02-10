@@ -62,6 +62,9 @@ class Services extends \yii\db\ActiveRecord
         )->inverseOf('service');
     }
 
+    /**
+     * @return int|string
+     */
     public function getOrders_count()
     {
         return Orders::find()->where(['service_id' => $this->id])->count();

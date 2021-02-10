@@ -34,6 +34,9 @@ class DefaultController extends Controller
     ]);
   }
 
+  /**
+   * @return array
+   */
   private function getStatusesFilterItems()
   {
     $statuses_filter_items = [
@@ -61,6 +64,9 @@ class DefaultController extends Controller
     return $statuses_filter_items;
   }
 
+  /**
+   * @return array
+   */
   private function getServicesFilterItems()
   {
     $services_filter_items = [
@@ -89,6 +95,9 @@ class DefaultController extends Controller
     return $services_filter_items;
   }
 
+  /**
+   * @return array
+   */
   private function getModesFilterItems()
   {
     return [

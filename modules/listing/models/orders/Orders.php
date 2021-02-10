@@ -25,6 +25,9 @@ class Orders extends \yii\db\ActiveRecord
     const MODE_MANUAL = 0;
     const MODE_AUTO   = 1;
 
+    /**
+     * @return array
+     */
     public static function modes()
     {
         return [
@@ -39,6 +42,9 @@ class Orders extends \yii\db\ActiveRecord
     const STATUS_CANCELED    = 3;
     const STATUS_FAIL        = 4;
 
+    /**
+     * @return array
+     */
     public static function statuses()
     {
         return [
@@ -109,6 +115,9 @@ class Orders extends \yii\db\ActiveRecord
         return $this->hasOne(Services::class, ['id' => 'service_id']);
     }
 
+    /**
+     * @return int|string
+     */
     public static function getTotal_count()
     {
         return self::find()->count();

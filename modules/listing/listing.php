@@ -3,6 +3,9 @@
 namespace app\modules\listing;
 
 
+/**
+ * [This class inits `listing` module]
+ */
 class listing extends \yii\base\Module
 {
     /**

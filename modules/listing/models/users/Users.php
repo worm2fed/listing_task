@@ -13,6 +13,7 @@ use app\modules\listing\models\orders\Orders;
  * @property int $id
  * @property string $first_name
  * @property string $last_name
+ * @property string $full_name
  */
 class Users extends \yii\db\ActiveRecord
 {
@@ -58,6 +59,9 @@ class Users extends \yii\db\ActiveRecord
         return new UsersQuery(get_called_class());
     }
 
+    /**
+     * @return string
+     */
     public function getFull_name()
     {
         return $this->first_name . ' ' . $this->last_name;
