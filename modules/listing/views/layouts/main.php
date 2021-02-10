@@ -1,5 +1,7 @@
 <?php
 
+use yii\bootstrap\NavBar;
+use yii\bootstrap\Nav;
 use yii\helpers\Html;
 
 use app\modules\listing\assets\ListingAsset;
@@ -13,8 +15,9 @@ ListingAsset::register($this);
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8"/>
+  <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <?= Html::csrfMetaTags() ?>
@@ -36,31 +39,29 @@ ListingAsset::register($this);
 </head>
 
 <body>
-<?php $this->beginBody() ?>
-<nav class="navbar navbar-fixed-top navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-navbar-collapse">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-    </div>
-    <div class="collapse navbar-collapse" id="bs-navbar-collapse">
-      <ul class="nav navbar-nav">
-        <li class="active">
-          <a href="#">
-            <?= Yii::t('listing', 'Orders') ?>
-          </a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
+  <?php $this->beginBody() ?>
+
+  <?php NavBar::begin([
+    'options' => ['class' => 'navbar navbar-fixed-top navbar-default'],
+    'innerContainerOptions' => ['class' => 'container-fluid'],
+  ]) ?>
+
+  <?= Nav::widget([
+    'items' => [
+      [
+        'label' => Yii::t('listing', 'Orders'),
+        'url'   => ['/listing/default'],
+        'active' => Yii::$app->controller->id == 'default'
+      ],
+    ],
+    'options' => ['class' => 'navbar-nav'],
+  ]) ?>
+
+  <?php NavBar::end() ?>
 
   <?= $content ?>
-<?php $this->endBody() ?>
+
+  <?php $this->endBody() ?>
 </body>
 
 </html>

@@ -25,7 +25,7 @@ $config = [
                     'class' => 'yii\i18n\PhpMessageSource',
                     'basePath' => '@app/messages',
                     'on missingTranslation' => [
-                        'app\components\TranslationEventHandler', 
+                        'app\components\TranslationEventHandler',
                         'handleMissingTranslation'
                     ]
                 ],
@@ -33,7 +33,7 @@ $config = [
                     'class'          => 'yii\i18n\PhpMessageSource',
                     'basePath'       => '@app/modules/listing/messages',
                     'on missingTranslation' => [
-                        'app\components\TranslationEventHandler', 
+                        'app\components\TranslationEventHandler',
                         'handleMissingTranslation'
                     ]
                 ]
@@ -73,8 +73,7 @@ $config = [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => [
-            ],
+            'rules' => [],
         ],
     ],
     'params' => $params,
