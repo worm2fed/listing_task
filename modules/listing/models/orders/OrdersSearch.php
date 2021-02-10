@@ -12,14 +12,17 @@ use app\modules\listing\models\orders\Orders;
  */
 class OrdersSearch extends Orders
 {
+    public $search;
+    public $search_type;
+
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['id', 'service_id', 'status', 'mode'], 'integer'],
-            [['link', 'username'], 'safe'],
+            [['service_id', 'status', 'mode', 'search_type'], 'integer'],
+            [['link', 'search'], 'safe'],
         ];
     }
 
@@ -65,18 +68,30 @@ class OrdersSearch extends Orders
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
             'service_id' => $this->service_id,
             'status' => $this->status,
             'mode' => $this->mode,
         ]);
 
-        $query->andFilterWhere(['like', 'link', $this->link]);
-
-        // $query->andWhere(
-        //     'user.first_name LIKE "%' . $this->username . '%" ' .
-        //         'OR user.last_name LIKE "%' . $this->username . '%"'
-        // );
+        if (isset($this->search_type) && isset($this->search)) {
+            $this->search = trim($this->search);
+            switch ($this->search_type) {
+                case 1:
+                    $query->andFilterWhere(['id' => $this->search]);
+                    break;
+                case 2:
+                    $query->andFilterWhere(['like', 'link', $this->search]);
+                    break;
+                case 3:
+                    $query->joinWith(['user']);
+                    $query->andFilterWhere([
+                        'like', 'CONCAT_WS(" ", users.first_name, users.last_name)', $this->search,
+                    ]);
+                    break;
+                default:
+                    break;
+            }
+        }
 
         return $dataProvider;
     }

@@ -19,7 +19,7 @@ $this->title = Yii::t('listing', 'Orders');
       [[
         'label' => SearchWidget::widget([
           'model'  => $searchModel,
-          'action' => 'listing',
+          'action' => ['/listing/default'],
           'method' => 'get',
         ]),
         'options' => ['class' => 'pull-right custom-search'],

@@ -27,10 +27,12 @@ use yii\widgets\ActiveForm;
     ]
   ) ?>
 
+  <?= Html::hiddenInput('status', Yii::$app->request->get('status')) ?>
+
   <span class="input-group-btn search-select-wrap">
     <?= Html::dropDownList(
-      'search-type',
-      Yii::$app->request->get('search-type'),
+      'search_type',
+      Yii::$app->request->get('search_type'),
       [
         1 => Yii::t('listing', 'Order ID'),
         2 => Yii::t('listing', 'Link'),
