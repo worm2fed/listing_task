@@ -14,6 +14,9 @@ $config = [
         '@npm'   => '@vendor/npm-asset',
     ],
     'modules' => [
+        'gridview' => [
+            'class' => 'kartik\grid\Module',
+        ],
         'listing' => [
             'class' => 'app\modules\listing\listing',
         ],
