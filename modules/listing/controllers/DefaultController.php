@@ -42,7 +42,7 @@ class DefaultController extends Controller
         'url'    => Url::current([
           'status' => null,
           'mode' => null,
-          'service' => null
+          'service_id' => null
         ]),
         'active' => is_null(Yii::$app->request->get('status'))
       ]
@@ -53,7 +53,7 @@ class DefaultController extends Controller
         'url'    => Url::current([
           'status' => $key,
           'mode' => null,
-          'service' => null
+          'service_id' => null
         ]),
         'active' => Yii::$app->request->get('status') === strval($key)
       ]);
