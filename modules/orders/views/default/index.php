@@ -2,6 +2,7 @@
 
 use yii\bootstrap\ButtonDropdown;
 use yii\grid\GridView;
+use yii\helpers\Url;
 use yii\widgets\Menu;
 
 use app\modules\orders\models\orders\Orders;
@@ -112,7 +113,7 @@ $export_widget = ExportMenu::widget([
       [[
         'label'    => SearchWidget::widget([
           'model'  => $searchModel,
-          'action' => ['/orders/default'],
+          'action' => Url::toRoute(['/orders']),
           'method' => 'get',
         ]),
         'options'  => ['class' => 'pull-right custom-search'],

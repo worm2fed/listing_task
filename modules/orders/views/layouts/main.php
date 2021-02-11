@@ -50,7 +50,7 @@ OrdersAsset::register($this);
     'items'   => [
       [
         'label'  => Yii::t('orders', 'Orders'),
-        'url'    => ['/orders/default'],
+        'url'    => ['/'],
         'active' => Yii::$app->controller->id == 'default'
       ],
     ],

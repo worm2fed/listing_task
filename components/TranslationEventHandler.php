@@ -1,15 +1,23 @@
-<?php 
+<?php
 
 namespace app\components;
 
 use yii\i18n\MissingTranslationEvent;
 
 
+/**
+ * [Description TranslationEventHandler]
+ */
 class TranslationEventHandler
 {
-    public static function handleMissingTranslation(MissingTranslationEvent $event) 
+    /**
+     * @param MissingTranslationEvent $event
+     * 
+     * @return [type]
+     */
+    public static function handleMissingTranslation(MissingTranslationEvent $event)
     {
-        $event->translatedMessage = 
+        $event->translatedMessage =
             "@MISSING: {$event->category}.{$event->message} FOR LANGUAGE {$event->language} @";
     }
 }
