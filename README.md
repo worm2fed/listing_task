@@ -69,13 +69,7 @@ Then
     GRANT ALL PRIVILEGES ON listing_task.* TO 'listing_task';
     exit
 
-Import database structure (you can find it in `sql/test_db_structure.sql`)
-
-    docker exec -i listing_task_mysql mysql -ulisting_task -plisting_task listing_task < sql/test_db_structure.sql
-
-Import test data (you can find it in `sql/test_db_data.sql.zip` - extract it before)
-
-    docker exec -i listing_task_mysql mysql -ulisting_task -plisting_task listing_task < sql/test_db_data.sql
+Unzip `sql/test_db_data.sql.zip` to the same folder (do not change name!)
 
 Apply migrations
 
