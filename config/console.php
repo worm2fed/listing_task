@@ -34,7 +34,7 @@ $config = [
             'migrationPath' => null,
             'migrationNamespaces' => [
                 'app\migrations',
-                'app\modules\listing\migrations',
+                'app\modules\orders\migrations',
             ],
         ],
     ],
