@@ -1,18 +1,18 @@
 <?php
 
-namespace app\modules\listing\models\services;
+namespace app\modules\orders\models\orders;
 
 
 /**
- * This is the ActiveQuery class for [[Services]].
+ * This is the ActiveQuery class for [[Orders]].
  *
- * @see Services
+ * @see Orders
  */
-class ServicesQuery extends \yii\db\ActiveQuery
+class OrdersQuery extends \yii\db\ActiveQuery
 {
     /**
      * {@inheritdoc}
-     * @return Services[]|array
+     * @return Orders[]|array
      */
     public function all($db = null)
     {
@@ -21,7 +21,7 @@ class ServicesQuery extends \yii\db\ActiveQuery
 
     /**
      * {@inheritdoc}
-     * @return Services|array|null
+     * @return Orders|array|null
      */
     public function one($db = null)
     {

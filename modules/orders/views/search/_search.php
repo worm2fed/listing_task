@@ -23,7 +23,7 @@ use yii\widgets\ActiveForm;
     Yii::$app->request->get('search'),
     [
       'class'       => 'form-control',
-      'placeholder' => Yii::t('listing', 'Search orders')
+      'placeholder' => Yii::t('orders', 'Search orders')
     ]
   ) ?>
 
@@ -34,9 +34,9 @@ use yii\widgets\ActiveForm;
       'search_type',
       Yii::$app->request->get('search_type'),
       [
-        1 => Yii::t('listing', 'Order ID'),
-        2 => Yii::t('listing', 'Link'),
-        3 => Yii::t('listing', 'Username'),
+        1 => Yii::t('orders', 'Order ID'),
+        2 => Yii::t('orders', 'Link'),
+        3 => Yii::t('orders', 'Username'),
       ],
       ['class' => 'form-control search-select']
     ) ?>

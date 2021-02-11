@@ -1,16 +1,16 @@
 <?php
 
-namespace app\modules\listing\assets;
+namespace app\modules\orders\assets;
 
 use yii\web\AssetBundle;
 
 
-class ListingAsset extends AssetBundle
+class OrdersAsset extends AssetBundle
 {
     /**
      * @var string
      */
-    public $sourcePath = '@app/modules/listing/assets';
+    public $sourcePath = '@app/modules/orders/assets';
 
     /**
      * {@inheritdoc}

@@ -4,8 +4,8 @@ use yii\bootstrap\ButtonDropdown;
 use yii\grid\GridView;
 use yii\widgets\Menu;
 
-use app\modules\listing\models\orders\Orders;
-use app\modules\listing\components\SearchWidget;
+use app\modules\orders\models\orders\Orders;
+use app\modules\orders\components\SearchWidget;
 
 use kartik\export\ExportMenu;
 
@@ -18,7 +18,7 @@ use kartik\export\ExportMenu;
 /* @var $modes_filter_items array */
 
 
-$this->title = Yii::t('listing', 'Orders');
+$this->title = Yii::t('orders', 'Orders');
 $grid_columns = [
   'id',
   [
@@ -89,7 +89,7 @@ $export_widget = ExportMenu::widget([
     ExportMenu::FORMAT_EXCEL    => false,
     ExportMenu::FORMAT_EXCEL_X  => false,
     ExportMenu::FORMAT_CSV      => [
-      'label'     => Yii::t('listing', 'Save result'),
+      'label'     => Yii::t('orders', 'Save result'),
       'icon'      => null,
       'mime'      => 'application/csv',
       'extension' => 'csv',
@@ -112,7 +112,7 @@ $export_widget = ExportMenu::widget([
       [[
         'label'    => SearchWidget::widget([
           'model'  => $searchModel,
-          'action' => ['/listing/default'],
+          'action' => ['/orders/default'],
           'method' => 'get',
         ]),
         'options'  => ['class' => 'pull-right custom-search'],

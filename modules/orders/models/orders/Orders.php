@@ -1,9 +1,9 @@
 <?php
 
-namespace app\modules\listing\models\orders;
+namespace app\modules\orders\models\orders;
 
-use app\modules\listing\models\services\Services;
-use app\modules\listing\models\users\Users;
+use app\modules\orders\models\services\Services;
+use app\modules\orders\models\users\Users;
 
 use Yii;
 
@@ -31,8 +31,8 @@ class Orders extends \yii\db\ActiveRecord
     public static function modes()
     {
         return [
-            self::MODE_MANUAL => Yii::t('listing', 'Manual'),
-            self::MODE_AUTO   => Yii::t('listing', 'Auto'),
+            self::MODE_MANUAL => Yii::t('orders', 'Manual'),
+            self::MODE_AUTO   => Yii::t('orders', 'Auto'),
         ];
     }
 
@@ -48,11 +48,11 @@ class Orders extends \yii\db\ActiveRecord
     public static function statuses()
     {
         return [
-            self::STATUS_PENDING     => Yii::t('listing', 'Pending'),
-            self::STATUS_IN_PROGRESS => Yii::t('listing', 'In progress'),
-            self::STATUS_COMPLETED   => Yii::t('listing', 'Completed'),
-            self::STATUS_CANCELED    => Yii::t('listing', 'Canceled'),
-            self::STATUS_FAIL        => Yii::t('listing', 'Fail'),
+            self::STATUS_PENDING     => Yii::t('orders', 'Pending'),
+            self::STATUS_IN_PROGRESS => Yii::t('orders', 'In progress'),
+            self::STATUS_COMPLETED   => Yii::t('orders', 'Completed'),
+            self::STATUS_CANCELED    => Yii::t('orders', 'Canceled'),
+            self::STATUS_FAIL        => Yii::t('orders', 'Fail'),
         ];
     }
 
@@ -82,17 +82,17 @@ class Orders extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id'         => Yii::t('listing', 'ID'),
-            'user_id'    => Yii::t('listing', 'User ID'),
-            'link'       => Yii::t('listing', 'Link'),
-            'quantity'   => Yii::t('listing', 'Quantity'),
-            'service_id' => Yii::t('listing', 'Service ID'),
-            'status'     => Yii::t('listing', 'Status'),
-            'created_at' => Yii::t('listing', 'Created'),
-            'mode'       => Yii::t('listing', 'Mode'),
+            'id'         => Yii::t('orders', 'ID'),
+            'user_id'    => Yii::t('orders', 'User ID'),
+            'link'       => Yii::t('orders', 'Link'),
+            'quantity'   => Yii::t('orders', 'Quantity'),
+            'service_id' => Yii::t('orders', 'Service ID'),
+            'status'     => Yii::t('orders', 'Status'),
+            'created_at' => Yii::t('orders', 'Created'),
+            'mode'       => Yii::t('orders', 'Mode'),
 
-            'user'       => Yii::t('listing', 'User'),
-            'service'    => Yii::t('listing', 'Service'),
+            'user'       => Yii::t('orders', 'User'),
+            'service'    => Yii::t('orders', 'Service'),
         ];
     }
 

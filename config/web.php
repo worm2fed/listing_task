@@ -17,8 +17,8 @@ $config = [
         'gridview' => [
             'class' => 'kartik\grid\Module',
         ],
-        'listing' => [
-            'class' => 'app\modules\listing\listing',
+        'orders' => [
+            'class' => 'app\modules\orders\orders',
         ],
     ],
     'components' => [
@@ -32,9 +32,9 @@ $config = [
                         'handleMissingTranslation'
                     ]
                 ],
-                'listing*' => [
+                'orders*' => [
                     'class'          => 'yii\i18n\PhpMessageSource',
-                    'basePath'       => '@app/modules/listing/messages',
+                    'basePath'       => '@app/modules/orders/messages',
                     'on missingTranslation' => [
                         'app\components\TranslationEventHandler',
                         'handleMissingTranslation'

@@ -1,15 +1,15 @@
 <?php
 
-namespace app\modules\listing\controllers;
+namespace app\modules\orders\controllers;
 
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use yii\web\Controller;
 
-use app\modules\listing\models\services\Services;
-use app\modules\listing\models\orders\Orders;
-use app\modules\listing\models\orders\OrdersSearch;
+use app\modules\orders\models\services\Services;
+use app\modules\orders\models\orders\Orders;
+use app\modules\orders\models\orders\OrdersSearch;
 
 
 class DefaultController extends Controller
@@ -41,7 +41,7 @@ class DefaultController extends Controller
   {
     $statuses_filter_items = [
       [
-        'label'  => Yii::t('listing', 'All orders'),
+        'label'  => Yii::t('orders', 'All orders'),
         'url'    => Url::current([
           'status'     => null,
           'mode'       => null,
@@ -71,7 +71,7 @@ class DefaultController extends Controller
   {
     $services_filter_items = [
       [
-        'label'   => Yii::t('listing', 'All') . ' (' . Orders::getTotal_count() . ')',
+        'label'   => Yii::t('orders', 'All') . ' (' . Orders::getTotal_count() . ')',
         'url'     => Url::current(['service_id' => null]),
         'options' => [
           'class' => is_null(Yii::$app->request->get('service_id'))
@@ -102,7 +102,7 @@ class DefaultController extends Controller
   {
     return [
       [
-        'label'  => Yii::t('listing', 'All'),
+        'label'  => Yii::t('orders', 'All'),
         'url'    => Url::current(['mode' => null]),
         'options' => [
           'class' => is_null(Yii::$app->request->get('mode'))
@@ -111,7 +111,7 @@ class DefaultController extends Controller
         ]
       ],
       [
-        'label'  => Yii::t('listing', 'Manual'),
+        'label'  => Yii::t('orders', 'Manual'),
         'url'    => Url::current(['mode' => 0]),
         'options' => [
           'class' => Yii::$app->request->get('mode') === strval(0)
@@ -120,7 +120,7 @@ class DefaultController extends Controller
         ]
       ],
       [
-        'label'  => Yii::t('listing', 'Auto'),
+        'label'  => Yii::t('orders', 'Auto'),
         'url'    => Url::current(['mode' => 1]),
         'options' => [
           'class' => Yii::$app->request->get('mode') === strval(1)

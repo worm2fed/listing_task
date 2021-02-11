@@ -1,18 +1,18 @@
 <?php
 
-namespace app\modules\listing\models\orders;
+namespace app\modules\orders\models\users;
 
 
 /**
- * This is the ActiveQuery class for [[Orders]].
+ * This is the ActiveQuery class for [[Users]].
  *
- * @see Orders
+ * @see Users
  */
-class OrdersQuery extends \yii\db\ActiveQuery
+class UsersQuery extends \yii\db\ActiveQuery
 {
     /**
      * {@inheritdoc}
-     * @return Orders[]|array
+     * @return Users[]|array
      */
     public function all($db = null)
     {
@@ -21,7 +21,7 @@ class OrdersQuery extends \yii\db\ActiveQuery
 
     /**
      * {@inheritdoc}
-     * @return Orders|array|null
+     * @return Users|array|null
      */
     public function one($db = null)
     {

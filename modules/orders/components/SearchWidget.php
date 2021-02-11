@@ -1,10 +1,13 @@
 <?php
 
-namespace app\modules\listing\components;
+namespace app\modules\orders\components;
 
 use yii\base\Widget;
 
 
+/**
+ * This widgets generates search form for orders
+ */
 class SearchWidget extends Widget
 {
     /**
@@ -45,6 +48,6 @@ class SearchWidget extends Widget
      */
     public function getViewPath()
     {
-        return '@app/modules/listing/views/search/';
+        return '@app/modules/orders/views/search/';
     }
 }

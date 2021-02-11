@@ -1,15 +1,15 @@
 <?php
 
-namespace app\modules\listing\models\orders;
+namespace app\modules\orders\models\orders;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
-use app\modules\listing\models\orders\Orders;
+use app\modules\orders\models\orders\Orders;
 
 
 /**
- * OrdersSearch represents the model behind the search form of `app\modules\listing\models\orders\Orders`.
+ * OrdersSearch represents the model behind the search form of `app\modules\orders\models\orders\Orders`.
  */
 class OrdersSearch extends Orders
 {

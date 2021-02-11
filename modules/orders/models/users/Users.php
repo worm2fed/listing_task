@@ -1,10 +1,10 @@
 <?php
 
-namespace app\modules\listing\models\users;
+namespace app\modules\orders\models\users;
 
 use Yii;
 
-use app\modules\listing\models\orders\Orders;
+use app\modules\orders\models\orders\Orders;
 
 
 /**
@@ -42,11 +42,11 @@ class Users extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id'         => Yii::t('listing', 'ID'),
-            'first_name' => Yii::t('listing', 'First Name'),
-            'last_name'  => Yii::t('listing', 'Last Name'),
+            'id'         => Yii::t('orders', 'ID'),
+            'first_name' => Yii::t('orders', 'First Name'),
+            'last_name'  => Yii::t('orders', 'Last Name'),
 
-            'full_name'  => Yii::t('listing', 'Full Name'),
+            'full_name'  => Yii::t('orders', 'Full Name'),
         ];
     }
 

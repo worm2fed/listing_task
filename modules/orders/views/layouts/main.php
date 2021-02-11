@@ -4,10 +4,10 @@ use yii\bootstrap\NavBar;
 use yii\bootstrap\Nav;
 use yii\helpers\Html;
 
-use app\modules\listing\assets\ListingAsset;
+use app\modules\orders\assets\OrdersAsset;
 
 
-ListingAsset::register($this);
+OrdersAsset::register($this);
 
 /* @var $this yii\web\View */
 /* @var $content string */
@@ -49,8 +49,8 @@ ListingAsset::register($this);
   <?= Nav::widget([
     'items'   => [
       [
-        'label'  => Yii::t('listing', 'Orders'),
-        'url'    => ['/listing/default'],
+        'label'  => Yii::t('orders', 'Orders'),
+        'url'    => ['/orders/default'],
         'active' => Yii::$app->controller->id == 'default'
       ],
     ],
