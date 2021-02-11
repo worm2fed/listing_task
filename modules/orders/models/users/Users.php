@@ -42,11 +42,11 @@ class Users extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id'         => Yii::t('orders', 'ID'),
-            'first_name' => Yii::t('orders', 'First Name'),
-            'last_name'  => Yii::t('orders', 'Last Name'),
+            'id'         => Yii::t('app', 'orders.labels.id'),
+            'first_name' => Yii::t('app', 'orders.labels.first_name'),
+            'last_name'  => Yii::t('app', 'orders.labels.last_name'),
 
-            'full_name'  => Yii::t('orders', 'Full Name'),
+            'full_name'  => Yii::t('app', 'orders.labels.full_name'),
         ];
     }
 

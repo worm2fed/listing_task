@@ -26,8 +26,8 @@ class DefaultController extends Controller
     $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
     return $this->render('index', [
-      'searchModel' => $searchModel,
-      'dataProvider' => $dataProvider,
+      'searchModel'           => $searchModel,
+      'dataProvider'          => $dataProvider,
       'services_filter_items' => $this->getServicesFilterItems(),
       'statuses_filter_items' => $this->getStatusesFilterItems(),
       'modes_filter_items'    => $this->getModesFilterItems(),
@@ -41,7 +41,7 @@ class DefaultController extends Controller
   {
     $statuses_filter_items = [
       [
-        'label'  => Yii::t('orders', 'All orders'),
+        'label'  => Yii::t('app', 'orders.statuses.all'),
         'url'    => Url::current([
           'status'     => null,
           'mode'       => null,
@@ -73,7 +73,7 @@ class DefaultController extends Controller
   {
     $services_filter_items = [
       [
-        'label'   => Yii::t('orders', 'All') . ' (' . Orders::getTotal_count() . ')',
+        'label'   => Yii::t('app', 'orders.services.all') . ' (' . Orders::getTotal_count() . ')',
         'url'     => Url::current(['service_id' => null]),
         'options' => [
           'class' => is_null(Yii::$app->request->get('service_id'))
@@ -106,7 +106,7 @@ class DefaultController extends Controller
   {
     $modes_filter_items = [
       [
-        'label'  => Yii::t('orders', 'All'),
+        'label'  => Yii::t('app', 'orders.modes.all'),
         'url'    => Url::current(['mode' => null]),
         'options' => [
           'class' => is_null(Yii::$app->request->get('mode'))

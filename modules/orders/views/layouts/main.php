@@ -49,7 +49,7 @@ OrdersAsset::register($this);
   <?= Nav::widget([
     'items'   => [
       [
-        'label'  => Yii::t('orders', 'Orders'),
+        'label'  => Yii::t('app', 'orders.title'),
         'url'    => ['/orders'],
         'active' => Yii::$app->controller->id == 'default'
       ],

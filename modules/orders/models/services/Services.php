@@ -40,8 +40,8 @@ class Services extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id'   => Yii::t('orders', 'ID'),
-            'name' => Yii::t('orders', 'Name'),
+            'id'   => Yii::t('app', 'orders.labels.id'),
+            'name' => Yii::t('app', 'orders.labels.name'),
         ];
     }
 

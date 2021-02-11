@@ -19,7 +19,7 @@ use kartik\export\ExportMenu;
 /* @var $modes_filter_items array */
 
 
-$this->title = Yii::t('orders', 'Orders');
+$this->title = Yii::t('app', 'orders.title');
 $grid_columns = [
   'id',
   [
@@ -90,7 +90,7 @@ $export_widget = ExportMenu::widget([
     ExportMenu::FORMAT_EXCEL    => false,
     ExportMenu::FORMAT_EXCEL_X  => false,
     ExportMenu::FORMAT_CSV      => [
-      'label'     => Yii::t('orders', 'Save result'),
+      'label'     => Yii::t('app', 'orders.save'),
       'icon'      => null,
       'mime'      => 'application/csv',
       'extension' => 'csv',

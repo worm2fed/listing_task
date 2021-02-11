@@ -24,7 +24,7 @@ use yii\widgets\ActiveForm;
     Yii::$app->request->get('search'),
     [
       'class'       => 'form-control',
-      'placeholder' => Yii::t('orders', 'Search orders')
+      'placeholder' => Yii::t('app', 'orders.search.placeholder')
     ]
   ) ?>
 

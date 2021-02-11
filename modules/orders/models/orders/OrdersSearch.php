@@ -24,9 +24,9 @@ class OrdersSearch extends Orders
     public static function search_types()
     {
         return [
-            self::SEARCH_TYPE_ID       => Yii::t('orders', 'Order ID'),
-            self::SEARCH_TYPE_LINK     => Yii::t('orders', 'Link'),
-            self::SEARCH_TYPE_USERNAME => Yii::t('orders', 'Username'),
+            self::SEARCH_TYPE_ID       => Yii::t('app', 'orders.search.types.id'),
+            self::SEARCH_TYPE_LINK     => Yii::t('app', 'orders.search.types.link'),
+            self::SEARCH_TYPE_USERNAME => Yii::t('app', 'orders.search.types.username'),
         ];
     }
 

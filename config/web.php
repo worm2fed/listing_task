@@ -7,7 +7,7 @@ $config = [
     'id' => 'listing_task',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
-    'sourceLanguage' => 'en-US',
+    'sourceLanguage' => 'code',
     'language' => 'en-US',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
@@ -25,17 +25,9 @@ $config = [
     'components' => [
         'i18n' => [
             'translations' => [
-                'common*' => [
-                    'class' => 'yii\i18n\PhpMessageSource',
+                'app*' => [
+                    'class' => 'app\components\MessageSource',
                     'basePath' => '@app/messages',
-                    'on missingTranslation' => [
-                        'app\components\TranslationEventHandler',
-                        'handleMissingTranslation'
-                    ]
-                ],
-                'orders*' => [
-                    'class'          => 'yii\i18n\PhpMessageSource',
-                    'basePath'       => '@app/modules/orders/messages',
                     'on missingTranslation' => [
                         'app\components\TranslationEventHandler',
                         'handleMissingTranslation'

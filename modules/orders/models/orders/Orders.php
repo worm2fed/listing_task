@@ -31,8 +31,8 @@ class Orders extends \yii\db\ActiveRecord
     public static function modes()
     {
         return [
-            self::MODE_MANUAL => Yii::t('orders', 'Manual'),
-            self::MODE_AUTO   => Yii::t('orders', 'Auto'),
+            self::MODE_MANUAL => Yii::t('app', 'orders.modes.manual'),
+            self::MODE_AUTO   => Yii::t('app', 'orders.modes.auto'),
         ];
     }
 
@@ -48,11 +48,11 @@ class Orders extends \yii\db\ActiveRecord
     public static function statuses()
     {
         return [
-            self::STATUS_PENDING     => Yii::t('orders', 'Pending'),
-            self::STATUS_IN_PROGRESS => Yii::t('orders', 'In progress'),
-            self::STATUS_COMPLETED   => Yii::t('orders', 'Completed'),
-            self::STATUS_CANCELED    => Yii::t('orders', 'Canceled'),
-            self::STATUS_FAIL        => Yii::t('orders', 'Fail'),
+            self::STATUS_PENDING     => Yii::t('app', 'orders.statuses.pending'),
+            self::STATUS_IN_PROGRESS => Yii::t('app', 'orders.statuses.in_progress'),
+            self::STATUS_COMPLETED   => Yii::t('app', 'orders.statuses.completed'),
+            self::STATUS_CANCELED    => Yii::t('app', 'orders.statuses.canceled'),
+            self::STATUS_FAIL        => Yii::t('app', 'orders.statuses.fail'),
         ];
     }
 
@@ -82,17 +82,17 @@ class Orders extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id'         => Yii::t('orders', 'ID'),
-            'user_id'    => Yii::t('orders', 'User ID'),
-            'link'       => Yii::t('orders', 'Link'),
-            'quantity'   => Yii::t('orders', 'Quantity'),
-            'service_id' => Yii::t('orders', 'Service ID'),
-            'status'     => Yii::t('orders', 'Status'),
-            'created_at' => Yii::t('orders', 'Created'),
-            'mode'       => Yii::t('orders', 'Mode'),
+            'id'         => Yii::t('app', 'orders.labels.id'),
+            'user_id'    => Yii::t('app', 'orders.labels.user_id'),
+            'service_id' => Yii::t('app', 'orders.labels.service_id'),
+            'link'       => Yii::t('app', 'orders.labels.link'),
+            'quantity'   => Yii::t('app', 'orders.labels.quantity'),
+            'status'     => Yii::t('app', 'orders.labels.status'),
+            'created_at' => Yii::t('app', 'orders.labels.created'),
+            'mode'       => Yii::t('app', 'orders.labels.mode'),
 
-            'user'       => Yii::t('orders', 'User'),
-            'service'    => Yii::t('orders', 'Service'),
+            'user'       => Yii::t('app', 'orders.labels.user'),
+            'service'    => Yii::t('app', 'orders.labels.service'),
         ];
     }
 
