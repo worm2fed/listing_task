@@ -1,5 +1,6 @@
 <?php
 
+use app\modules\orders\models\orders\OrdersSearch;
 use Yii;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -33,11 +34,7 @@ use yii\widgets\ActiveForm;
     <?= Html::dropDownList(
       'search_type',
       Yii::$app->request->get('search_type'),
-      [
-        1 => Yii::t('orders', 'Order ID'),
-        2 => Yii::t('orders', 'Link'),
-        3 => Yii::t('orders', 'Username'),
-      ],
+      OrdersSearch::search_types(),
       ['class' => 'form-control search-select']
     ) ?>
 

@@ -17,7 +17,7 @@ class DefaultController extends Controller
   public $layout = 'main';
 
   /**
-   * Lists all Orders models.
+   * Lists all Orders models (with filters applied).
    * @return mixed
    */
   public function actionIndex()
@@ -50,6 +50,7 @@ class DefaultController extends Controller
         'active' => is_null(Yii::$app->request->get('status'))
       ]
     ];
+
     foreach (Orders::statuses() as $key => $value) {
       array_push($statuses_filter_items, [
         'label'  => $value,
@@ -61,6 +62,7 @@ class DefaultController extends Controller
         'active' => Yii::$app->request->get('status') === strval($key)
       ]);
     }
+
     return $statuses_filter_items;
   }
 
@@ -80,6 +82,7 @@ class DefaultController extends Controller
         ]
       ]
     ];
+
     foreach (Services::find()->all() as $item) {
       array_push($services_filter_items, [
         'label'   => '<span class="label-id">' . $item->orders_count . '</span> ' . $item->name,
@@ -92,6 +95,7 @@ class DefaultController extends Controller
       ]);
     }
     ArrayHelper::multisort($services_filter_items, 'count', SORT_DESC);
+
     return $services_filter_items;
   }
 
@@ -100,7 +104,7 @@ class DefaultController extends Controller
    */
   private function getModesFilterItems()
   {
-    return [
+    $modes_filter_items = [
       [
         'label'  => Yii::t('orders', 'All'),
         'url'    => Url::current(['mode' => null]),
@@ -109,25 +113,21 @@ class DefaultController extends Controller
             ? 'active'
             : ''
         ]
-      ],
-      [
-        'label'  => Yii::t('orders', 'Manual'),
-        'url'    => Url::current(['mode' => 0]),
-        'options' => [
-          'class' => Yii::$app->request->get('mode') === strval(0)
-            ? 'active'
-            : ''
-        ]
-      ],
-      [
-        'label'  => Yii::t('orders', 'Auto'),
-        'url'    => Url::current(['mode' => 1]),
-        'options' => [
-          'class' => Yii::$app->request->get('mode') === strval(1)
-            ? 'active'
-            : ''
-        ]
-      ],
+      ]
     ];
+
+    foreach (Orders::modes() as $key => $value) {
+      array_push($modes_filter_items, [
+        'label'  => $value,
+        'url'    => Url::current(['mode' => $key]),
+        'options' => [
+          'class' => Yii::$app->request->get('mode') === strval($key)
+            ? 'active'
+            : ''
+        ]
+      ]);
+    }
+
+    return $modes_filter_items;
   }
 }
