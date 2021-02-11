@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\orders\components;
+namespace app\modules\orders\widgets;
 
 use yii\base\Widget;
 
@@ -41,13 +41,5 @@ class SearchWidget extends Widget
             'action' => $this->action,
             'method' => $this->method,
         ]);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getViewPath()
-    {
-        return '@app/modules/orders/views/search/';
     }
 }

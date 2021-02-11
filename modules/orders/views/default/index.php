@@ -2,11 +2,8 @@
 
 use yii\bootstrap\ButtonDropdown;
 use yii\grid\GridView;
-use yii\helpers\Url;
-use yii\widgets\Menu;
 
-use app\modules\orders\models\orders\Orders;
-use app\modules\orders\components\SearchWidget;
+use app\modules\orders\widgets\FilterAndSearchWidget;
 
 use kartik\export\ExportMenu;
 
@@ -14,9 +11,6 @@ use kartik\export\ExportMenu;
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\orders\models\OrdersSearch */
 /* @var $dataProvider \yii\data\ActiveDataProvider */
-/* @var $statuses_filter_items array */
-/* @var $services_filter_items array */
-/* @var $modes_filter_items array */
 
 
 $this->title = Yii::t('app', 'orders.title');
@@ -38,41 +32,40 @@ $grid_columns = [
       return '<span class="label-id">' . $service->orders_count . '</span> ' . $service->name;
     },
     'contentOptions' => ['class' => 'service'],
-    'headerOptions' => ['class' => 'dropdown-th'],
+    'headerOptions'  => ['class' => 'dropdown-th'],
     'header' => ButtonDropdown::widget([
-      'label'    => Orders::instance()->getAttributeLabel('service'),
+      'label'    => Yii::t('app', 'orders.labels.service'),
       'options'  => ['class' => 'btn btn-th btn-default dropdown-toggle'],
       'dropdown' => [
         'encodeLabels' => false,
-        'items'        => $services_filter_items,
+        'items'        => $searchModel->getServicesFilterItems(),
       ],
     ])
   ],
   [
     'attribute' => 'status',
     'value'     => function ($order) {
-      return Orders::statuses()[$order->status];
+      return $order->getStatusName();
     },
   ],
   [
     'attribute'    => 'mode',
     'value'        => function ($order) {
-      return Orders::modes()[$order->mode];
+      return $order->getModeName();
     },
     'headerOptions' => ['class' => 'dropdown-th'],
     'header'        => ButtonDropdown::widget([
-      'label'    => Orders::instance()->getAttributeLabel('mode'),
+      'label'    => Yii::t('app', 'orders.labels.mode'),
       'options'  => ['class' => 'btn btn-th btn-default dropdown-toggle'],
-      'dropdown' => ['items' => $modes_filter_items],
+      'dropdown' => ['items' => $searchModel->getModesFilterItems()],
     ])
   ],
   [
     'attribute' => 'created_at',
     'content'   => function ($order) {
-      $dt = new DateTime();
-      $dt->setTimestamp($order->created_at);
-      return '<span class="nowrap">' . $dt->format('Y-m-d') . '</span>' .
-        '<span class="nowrap">' . $dt->format('H:m:s') . '</span>';
+      [$date, $time] = $order->getFormateCreatedAt();
+      return '<span class="nowrap">' . $date . '</span>' .
+        '<span class="nowrap">' . $time . '</span>';
     }
   ],
 ];
@@ -106,22 +99,7 @@ $export_widget = ExportMenu::widget([
 ?>
 
 <div class="container-fluid">
-  <?= Menu::widget([
-    'options' => ['class' => 'nav nav-tabs p-b'],
-    'items'   => array_merge(
-      $statuses_filter_items,
-      [[
-        'label'    => SearchWidget::widget([
-          'model'  => $searchModel,
-          'action' => Url::toRoute(['/orders']),
-          'method' => 'get',
-        ]),
-        'options'  => ['class' => 'pull-right custom-search'],
-        'template' => '{label}',
-        'encode'   => false
-      ]]
-    )
-  ]) ?>
+  <?= FilterAndSearchWidget::widget(['model'  => $searchModel,]) ?>
 
   <?= GridView::widget([
     'dataProvider'   => $dataProvider,

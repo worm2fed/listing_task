@@ -42,7 +42,9 @@ OrdersAsset::register($this);
   <?php $this->beginBody() ?>
 
   <?php NavBar::begin([
-    'options'               => ['class' => 'navbar navbar-fixed-top navbar-default'],
+    'options'               => [
+      'class' => 'navbar navbar-fixed-top navbar-default'
+    ],
     'innerContainerOptions' => ['class' => 'container-fluid'],
   ]) ?>
 

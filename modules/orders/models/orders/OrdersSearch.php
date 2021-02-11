@@ -5,8 +5,11 @@ namespace app\modules\orders\models\orders;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
 
 use app\modules\orders\models\orders\Orders;
+use app\modules\orders\models\services\Services;
 
 
 /**
@@ -118,5 +121,97 @@ class OrdersSearch extends Orders
         }
 
         return $dataProvider;
+    }
+
+    /**
+     * @return array
+     */
+    public function getStatusesFilterItems(): array
+    {
+        $items = [
+            [
+                'label'  => Yii::t('app', 'orders.statuses.all'),
+                'url'    => Url::current([
+                    'status'     => null,
+                    'mode'       => null,
+                    'service_id' => null
+                ]),
+                'active' => is_null($this->status)
+            ]
+        ];
+
+        foreach (Orders::statuses() as $key => $value) {
+            array_push($items, [
+                'label'  => $value,
+                'url'    => Url::current([
+                    'status'     => $key,
+                    'mode'       => null,
+                    'service_id' => null
+                ]),
+                'active' => $this->status === strval($key)
+            ]);
+        }
+
+        return $items;
+    }
+
+    /**
+     * @return array
+     */
+    public function getServicesFilterItems(): array
+    {
+        $items = [
+            [
+                'label'   => Yii::t('app', 'orders.services.all') .
+                    ' (' . Orders::getTotal_count() . ')',
+                'url'     => Url::current(['service_id' => null]),
+                'options' => [
+                    'class' => is_null($this->service_id) ? 'active' : ''
+                ]
+            ]
+        ];
+
+        foreach (Services::find()->all() as $item) {
+            array_push($items, [
+                'label'   => '<span class="label-id">' .
+                    $item->orders_count . '</span> ' . $item->name,
+                'url'     => Url::current(['service_id' => $item->id]),
+                'options' => [
+                    'class' => $this->service_id === strval($item->id)
+                        ? 'active' : ''
+                ]
+            ]);
+        }
+        ArrayHelper::multisort($items, 'count', SORT_DESC);
+
+        return $items;
+    }
+
+    /**
+     * @return array
+     */
+    public function getModesFilterItems(): array
+    {
+        $items = [
+            [
+                'label'  => Yii::t('app', 'orders.modes.all'),
+                'url'    => Url::current(['mode' => null]),
+                'options' => [
+                    'class' => is_null($this->mode) ? 'active' : ''
+                ]
+            ]
+        ];
+
+        foreach (Orders::modes() as $key => $value) {
+            array_push($items, [
+                'label'  => $value,
+                'url'    => Url::current(['mode' => $key]),
+                'options' => [
+                    'class' => $this->mode === strval($key) ? 'active' : ''
+                ]
+            ]);
+        }
+
+        return $items;
     }
 }

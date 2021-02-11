@@ -28,7 +28,7 @@ class Orders extends \yii\db\ActiveRecord
     /**
      * @return array
      */
-    public static function modes()
+    public static function modes(): array
     {
         return [
             self::MODE_MANUAL => Yii::t('app', 'orders.modes.manual'),
@@ -45,7 +45,7 @@ class Orders extends \yii\db\ActiveRecord
     /**
      * @return array
      */
-    public static function statuses()
+    public static function statuses(): array
     {
         return [
             self::STATUS_PENDING     => Yii::t('app', 'orders.statuses.pending'),
@@ -105,6 +105,27 @@ class Orders extends \yii\db\ActiveRecord
         return new OrdersQuery(get_called_class());
     }
 
+    /**
+     * @return array
+     */
+    public function getFormateCreatedAt()
+    {
+        $dt = new \DateTime();
+        $dt->setTimestamp($this->created_at);
+
+        return [$dt->format('Y-m-d'), $dt->format('H:m:s')];
+    }
+
+    public function getStatusName(): string
+    {
+        return self::statuses()[$this->status];
+    }
+
+    public function getModeName(): string
+    {
+        return self::modes()[$this->mode];
+    }
+
     public function getUser()
     {
         return $this->hasOne(Users::class, ['id' => 'user_id']);
@@ -118,7 +139,7 @@ class Orders extends \yii\db\ActiveRecord
     /**
      * @return int|string
      */
-    public static function getTotal_count()
+    public static function getTotal_count(): int
     {
         return self::find()->count();
     }
