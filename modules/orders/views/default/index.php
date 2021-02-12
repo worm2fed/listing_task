@@ -9,7 +9,7 @@ use app\modules\orders\widgets\SaveWidget;
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\orders\models\OrdersSearch */
 /* @var $dataProvider \yii\data\ActiveDataProvider */
-
+/* @var $services array */
 
 $this->title = Yii::t('app', 'orders.title');
 $grid_columns = [
@@ -25,9 +25,9 @@ $grid_columns = [
   'quantity',
   [
     'attribute' => 'service',
-    'content'   => function ($order) {
-      $service = $order->service;
-      return '<span class="label-id">' . $service->orders_count . '</span> ' . $service->name;
+    'content'   => function ($order) use ($services) {
+      $service = $services[$order->service_id];
+      return '<span class="label-id">' . $service['orders_count'] . '</span> ' . $service['name'];
     },
     'contentOptions' => ['class' => 'service'],
     'headerOptions'  => ['class' => 'dropdown-th'],

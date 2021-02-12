@@ -3,10 +3,8 @@
 namespace app\modules\orders\controllers;
 
 use Yii;
-use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 
-use app\modules\orders\models\orders\Orders;
 use app\modules\orders\models\orders\OrdersSearch;
 use app\modules\orders\models\services\Services;
 
@@ -29,7 +27,8 @@ class DefaultController extends Controller
 
     return $this->render('index', [
       'searchModel'  => $searchModel,
-      'dataProvider' => $dataProvider
+      'dataProvider' => $dataProvider,
+      'services'     => Services::getServicesArray()
     ]);
   }
 
@@ -45,7 +44,7 @@ class DefaultController extends Controller
     );
 
     return Yii::$app->response->sendStreamAsFile(
-      Orders::export($query),
+      $searchModel::export($query),
       'orders_' . time() . '.csv',
       ['mimeType' => 'text/csv']
     );
