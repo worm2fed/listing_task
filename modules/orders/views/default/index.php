@@ -85,7 +85,8 @@ $grid_columns = [
         'summary'        => '{begin} to {end} of {totalCount}',
         'filterPosition' => null,
         'columns'        => $grid_columns,
-        'tableOptions'   => ['class' => 'table order-table']
+        'tableOptions'   => ['class' => 'table order-table'],
+        'options'        => ['tag' => null]
     ]); ?>
 
 </div>
