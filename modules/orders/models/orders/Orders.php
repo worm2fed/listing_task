@@ -2,10 +2,11 @@
 
 namespace app\modules\orders\models\orders;
 
+use Yii;
+
+use app\components\UnbufferedConnection;
 use app\modules\orders\models\services\Services;
 use app\modules\orders\models\users\Users;
-
-use Yii;
 
 
 /**
@@ -108,12 +109,20 @@ class Orders extends \yii\db\ActiveRecord
     /**
      * @return array
      */
-    public function getFormateCreatedAt()
+    public static function formateCreatedAt(int $created_at): array
     {
         $dt = new \DateTime();
-        $dt->setTimestamp($this->created_at);
+        $dt->setTimestamp($created_at);
 
         return [$dt->format('Y-m-d'), $dt->format('H:m:s')];
+    }
+
+    /**
+     * @return array
+     */
+    public function getFormateCreatedAt(): array
+    {
+        return self::formateCreatedAt($this->created_at);
     }
 
     public function getStatusName(): string
@@ -142,5 +151,40 @@ class Orders extends \yii\db\ActiveRecord
     public static function getTotal_count(): int
     {
         return self::find()->count();
+    }
+
+    public static function export($query)
+    {
+        $services = Services::getServicesArray();
+        $columns = [
+            Yii::t('app', 'orders.labels.id'),
+            Yii::t('app', 'orders.labels.user'),
+            Yii::t('app', 'orders.labels.link'),
+            Yii::t('app', 'orders.labels.quantity'),
+            Yii::t('app', 'orders.labels.service'),
+            Yii::t('app', 'orders.labels.status'),
+            Yii::t('app', 'orders.labels.mode'),
+            Yii::t('app', 'orders.labels.created')
+        ];
+
+        $file = fopen('php://memory', 'wb');
+        fputcsv($file, $columns);
+
+        foreach ($query->asArray()->each(1000, UnbufferedConnection::getInstance()) as $data) {
+            $service = $services[$data['service_id']];
+            $raw = [
+                $data['id'],
+                $data['user']['first_name'] . ' ' . $data['user']['last_name'],
+                $data['link'],
+                $data['quantity'],
+                $service['orders_count'] . ' ' . $service['name'],
+                self::statuses()[$data['status']],
+                self::modes()[$data['mode']],
+                implode(' ', self::formateCreatedAt($data['created_at'])),
+            ];
+            fputcsv($file, $raw);
+        }
+
+        return $file;
     }
 }

@@ -69,4 +69,16 @@ class Services extends \yii\db\ActiveRecord
     {
         return Orders::find()->where(['service_id' => $this->id])->count();
     }
+
+    public static function getServicesArray()
+    {
+        $services = [];
+        foreach (self::find()->all() as $service) {
+            $services[$service->id] = [
+                'orders_count' => $service->orders_count,
+                'name' => $service->name
+            ];
+        }
+        return $services;
+    }
 }

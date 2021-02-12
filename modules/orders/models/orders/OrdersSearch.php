@@ -5,6 +5,7 @@ namespace app\modules\orders\models\orders;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use yii\data\SqlDataProvider;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 
@@ -61,37 +62,26 @@ class OrdersSearch extends Orders
     }
 
     /**
-     * Creates data provider instance with search query applied
-     *
+     * Builds query for searching
      * @param array $params
      *
-     * @return ActiveDataProvider
+     * @return \app\modules\orders\models\orders\OrdersQuery
      */
-    public function search($params)
+    public function buildQuery(array $params)
     {
-        $query = Orders::find();
-
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-            'pagination' => [
-                'pageSize' => 100,
-            ],
-            'sort' => [
-                'defaultOrder' => [
-                    'id' => SORT_DESC,
-                ]
-            ],
-        ]);
-
         $this->load($params, '');
+
+        $query = Orders::find();
+        $query->orderBy('id DESC');
+        $query->joinWith('user');
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
             $query->where('0=1');
-            return $dataProvider;
+            return $query;
         }
 
-        // grid filtering conditions
+        // filtering conditions
         $query->andFilterWhere([
             'service_id' => $this->service_id,
             'status'     => $this->status,
@@ -108,7 +98,6 @@ class OrdersSearch extends Orders
                     $query->andFilterWhere(['like', 'link', $this->search]);
                     break;
                 case self::SEARCH_TYPE_USERNAME:
-                    $query->joinWith(['user']);
                     $query->andFilterWhere([
                         'like',
                         'CONCAT_WS(" ", users.first_name, users.last_name)',
@@ -120,7 +109,26 @@ class OrdersSearch extends Orders
             }
         }
 
-        return $dataProvider;
+        return $query;
+    }
+
+    /**
+     * Creates data provider instance with search query applied
+     *
+     * @param array $params
+     *
+     * @return ActiveDataProvider
+     */
+    public function search(array $params)
+    {
+        return new ActiveDataProvider([
+            'query'      => $this->buildQuery($params),
+            'pagination' => ['pageSize' => 100],
+            'sort'       => [
+                'defaultOrder' => ['id' => SORT_DESC],
+                'attributes'   => ['id']
+            ]
+        ]);
     }
 
     /**

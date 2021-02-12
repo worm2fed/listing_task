@@ -3,11 +3,17 @@
 namespace app\modules\orders\controllers;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 
+use app\modules\orders\models\orders\Orders;
 use app\modules\orders\models\orders\OrdersSearch;
+use app\modules\orders\models\services\Services;
 
 
+/**
+ * [Description DefaultController]
+ */
 class DefaultController extends Controller
 {
   public $layout = 'main';
@@ -25,5 +31,23 @@ class DefaultController extends Controller
       'searchModel'  => $searchModel,
       'dataProvider' => $dataProvider
     ]);
+  }
+
+  /**
+   * Exports all Orders models (with filters applied).
+   * @return mixed
+   */
+  public function actionExport()
+  {
+    $searchModel = new OrdersSearch();
+    $query = $searchModel->buildQuery(
+      Yii::$app->request->queryParams
+    );
+
+    return Yii::$app->response->sendStreamAsFile(
+      Orders::export($query),
+      'orders_' . time() . '.csv',
+      ['mimeType' => 'text/csv']
+    );
   }
 }

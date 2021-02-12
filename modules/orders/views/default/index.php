@@ -4,9 +4,7 @@ use yii\bootstrap\ButtonDropdown;
 use yii\grid\GridView;
 
 use app\modules\orders\widgets\FilterAndSearchWidget;
-
-use kartik\export\ExportMenu;
-
+use app\modules\orders\widgets\SaveWidget;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\orders\models\OrdersSearch */
@@ -69,33 +67,6 @@ $grid_columns = [
     }
   ],
 ];
-$export_widget = ExportMenu::widget([
-  'dataProvider'     => $dataProvider,
-  'columns'          => $grid_columns,
-  'target'           => ExportMenu::TARGET_BLANK,
-  'asDropdown'       => false,
-  'showConfirmAlert' => false,
-  'filename'         => 'orders-export',
-  'exportConfig'     => [
-    ExportMenu::FORMAT_HTML     => false,
-    ExportMenu::FORMAT_TEXT     => false,
-    ExportMenu::FORMAT_PDF      => false,
-    ExportMenu::FORMAT_EXCEL    => false,
-    ExportMenu::FORMAT_EXCEL_X  => false,
-    ExportMenu::FORMAT_CSV      => [
-      'label'     => Yii::t('app', 'orders.save'),
-      'icon'      => null,
-      'mime'      => 'application/csv',
-      'extension' => 'csv',
-      'writer'    => ExportMenu::FORMAT_CSV,
-      'options'   => [
-        'title' => null,
-        'tag'   => 'span',
-        'class' => 'pull-right'
-      ]
-    ]
-  ],
-]);
 ?>
 
 <div class="container-fluid">
@@ -108,7 +79,7 @@ $export_widget = ExportMenu::widget([
       <div class="row">
         <div class="col-sm-8">{pager}</div> 
         <div class="col-sm-4 pagination-counters">
-          {summary}<br>' . $export_widget . '
+          {summary}<br>' . SaveWidget::widget() . '
         </div>
       </div>',
     'summary'        => '{begin} to {end} of {totalCount}',

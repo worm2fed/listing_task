@@ -14,9 +14,6 @@ $config = [
         '@npm'   => '@vendor/npm-asset',
     ],
     'modules' => [
-        'gridview' => [
-            'class' => 'kartik\grid\Module',
-        ],
         'orders' => [
             'class' => 'app\modules\orders\orders',
         ],
@@ -71,6 +68,7 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                 '/orders' => 'orders/default/index',
+                '/orders/export' => 'orders/default/export',
             ]
         ],
     ],
