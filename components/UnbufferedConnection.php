@@ -6,21 +6,20 @@ use PDO;
 use Yii;
 use yii\db\Connection;
 
-
 class UnbufferedConnection
 {
-    private static ?Connection $_instance = null;
+    private static ?Connection $connection = null;
 
     protected function __construct()
     {
-        self::$_instance = new Connection([
+        self::$connection = new Connection([
             'dsn'      => Yii::$app->db->dsn,
             'username' => Yii::$app->db->username,
             'password' => Yii::$app->db->password,
             'charset'  => Yii::$app->db->charset,
         ]);
-        self::$_instance->open();
-        self::$_instance->pdo->setAttribute(
+        self::$connection->open();
+        self::$connection->pdo->setAttribute(
             PDO::MYSQL_ATTR_USE_BUFFERED_QUERY,
             false
         );
@@ -37,15 +36,15 @@ class UnbufferedConnection
 
     public static function getInstance(): Connection
     {
-        if (self::$_instance != null) {
-            return self::$_instance;
+        if (self::$connection != null) {
+            return self::$connection;
         }
 
-        return (new self)::$_instance;
+        return (new self)::$connection;
     }
 
     protected function __destruct()
     {
-        self::$_instance->close();
+        self::$connection->close();
     }
 }

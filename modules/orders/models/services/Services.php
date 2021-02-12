@@ -6,7 +6,6 @@ use Yii;
 
 use app\modules\orders\models\orders\Orders;
 
-
 /**
  * This is the model class for table "services".
  *

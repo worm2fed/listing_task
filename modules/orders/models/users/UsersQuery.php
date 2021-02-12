@@ -2,7 +2,6 @@
 
 namespace app\modules\orders\models\users;
 
-
 /**
  * This is the ActiveQuery class for [[Users]].
  *

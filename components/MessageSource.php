@@ -2,8 +2,8 @@
 
 namespace app\components;
 
-use \RecursiveIteratorIterator;
-use \RecursiveArrayIterator;
+use RecursiveIteratorIterator;
+use RecursiveArrayIterator;
 
 /**
  * This class redefines only one method to use nested array for translations
@@ -13,7 +13,7 @@ class MessageSource extends \yii\i18n\PhpMessageSource
     /**
      * {@inheritdoc}
      */
-    protected function loadMessagesFromFile($messageFile)
+    protected function loadMessagesFromFile($messageFile): ?array
     {
         $result = parent::loadMessagesFromFile($messageFile);
 
@@ -24,7 +24,7 @@ class MessageSource extends \yii\i18n\PhpMessageSource
         return $result;
     }
 
-    private static function convertArray($array)
+    private static function convertArray(array $array): array
     {
         $iterator = new RecursiveIteratorIterator(
             new RecursiveArrayIterator($array),

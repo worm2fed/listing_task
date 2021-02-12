@@ -5,7 +5,6 @@ namespace app\modules\orders\migrations;
 use Yii;
 use yii\db\Migration;
 
-
 /**
  * Class M210211090841InitStructure
  */

@@ -13,40 +13,40 @@ use yii\widgets\ActiveForm;
 ?>
 
 <?php $form = ActiveForm::begin([
-  'action'  => $action,
-  'method'  => $method,
-  'options' => ['class' => 'form-inline']
+    'action'  => $action,
+    'method'  => $method,
+    'options' => ['class' => 'form-inline']
 ]); ?>
 
 <div class="input-group">
-  <?= Html::textInput(
-    'search',
-    Yii::$app->request->get('search'),
-    [
-      'class'       => 'form-control',
-      'placeholder' => Yii::t('app', 'orders.search.placeholder')
-    ]
-  ) ?>
-
-  <?= Html::hiddenInput('status', Yii::$app->request->get('status')) ?>
-
-  <span class="input-group-btn search-select-wrap">
-    <?= Html::dropDownList(
-      'search_type',
-      Yii::$app->request->get('search_type'),
-      OrdersSearch::search_types(),
-      ['class' => 'form-control search-select']
+    <?= Html::textInput(
+        'search',
+        Yii::$app->request->get('search'),
+        [
+            'class'       => 'form-control',
+            'placeholder' => Yii::t('app', 'orders.search.placeholder')
+        ]
     ) ?>
 
-    <?= Html::submitButton(
-      Html::tag('span', '', [
-        'class'       => 'glyphicon glyphicon-search',
-        'aria-hidden' => 'true'
-      ]),
-      ['class' => 'btn btn-default']
-    )
-    ?>
-  </span>
+    <?= Html::hiddenInput('status', Yii::$app->request->get('status')) ?>
+
+    <span class="input-group-btn search-select-wrap">
+        <?= Html::dropDownList(
+            'search_type',
+            Yii::$app->request->get('search_type'),
+            OrdersSearch::search_types(),
+            ['class' => 'form-control search-select']
+        ) ?>
+
+        <?= Html::submitButton(
+            Html::tag('span', '', [
+                'class'       => 'glyphicon glyphicon-search',
+                'aria-hidden' => 'true'
+            ]),
+            ['class' => 'btn btn-default']
+        )
+        ?>
+    </span>
 </div>
 
 <?php ActiveForm::end(); ?>

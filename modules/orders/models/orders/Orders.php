@@ -8,7 +8,6 @@ use app\components\UnbufferedConnection;
 use app\modules\orders\models\services\Services;
 use app\modules\orders\models\users\Users;
 
-
 /**
  * This is the model class for table "orders".
  *
@@ -23,8 +22,8 @@ use app\modules\orders\models\users\Users;
  */
 class Orders extends \yii\db\ActiveRecord
 {
-    const MODE_MANUAL = 0;
-    const MODE_AUTO   = 1;
+    public const MODE_MANUAL = 0;
+    public const MODE_AUTO   = 1;
 
     /**
      * @return array
@@ -37,11 +36,11 @@ class Orders extends \yii\db\ActiveRecord
         ];
     }
 
-    const STATUS_PENDING     = 0;
-    const STATUS_IN_PROGRESS = 1;
-    const STATUS_COMPLETED   = 2;
-    const STATUS_CANCELED    = 3;
-    const STATUS_FAIL        = 4;
+    public const STATUS_PENDING     = 0;
+    public const STATUS_IN_PROGRESS = 1;
+    public const STATUS_COMPLETED   = 2;
+    public const STATUS_CANCELED    = 3;
+    public const STATUS_FAIL        = 4;
 
     /**
      * @return array
@@ -153,7 +152,7 @@ class Orders extends \yii\db\ActiveRecord
         return self::find()->count();
     }
 
-    public static function export($query)
+    public static function export(OrdersQuery $query)
     {
         $services = Services::getServicesArray();
         $columns = [

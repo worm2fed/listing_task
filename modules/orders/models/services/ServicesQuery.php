@@ -2,7 +2,6 @@
 
 namespace app\modules\orders\models\services;
 
-
 /**
  * This is the ActiveQuery class for [[Services]].
  *

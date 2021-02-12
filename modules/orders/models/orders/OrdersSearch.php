@@ -5,22 +5,20 @@ namespace app\modules\orders\models\orders;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use yii\data\SqlDataProvider;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 
 use app\modules\orders\models\orders\Orders;
 use app\modules\orders\models\services\Services;
 
-
 /**
  * OrdersSearch represents the model behind the search form of `app\modules\orders\models\orders\Orders`.
  */
 class OrdersSearch extends Orders
 {
-    const SEARCH_TYPE_ID       = 1;
-    const SEARCH_TYPE_LINK     = 2;
-    const SEARCH_TYPE_USERNAME = 3;
+    public const SEARCH_TYPE_ID       = 1;
+    public const SEARCH_TYPE_LINK     = 2;
+    public const SEARCH_TYPE_USERNAME = 3;
 
     /**
      * @return array

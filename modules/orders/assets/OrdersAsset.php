@@ -4,7 +4,6 @@ namespace app\modules\orders\assets;
 
 use yii\web\AssetBundle;
 
-
 class OrdersAsset extends AssetBundle
 {
     /**

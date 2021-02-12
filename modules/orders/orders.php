@@ -2,9 +2,8 @@
 
 namespace app\modules\orders;
 
-
 /**
- * [This class inits `orders` module]
+ * This class inits `orders` module.
  */
 class orders extends \yii\base\Module
 {

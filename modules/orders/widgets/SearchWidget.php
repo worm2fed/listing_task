@@ -4,7 +4,6 @@ namespace app\modules\orders\widgets;
 
 use yii\base\Widget;
 
-
 /**
  * This widgets generates search form for orders
  */

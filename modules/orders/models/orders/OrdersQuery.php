@@ -2,7 +2,6 @@
 
 namespace app\modules\orders\models\orders;
 
-
 /**
  * This is the ActiveQuery class for [[Orders]].
  *
