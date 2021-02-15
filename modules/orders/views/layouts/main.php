@@ -53,7 +53,7 @@ OrdersAsset::register($this);
             [
                 'label'  => Yii::t('app', 'orders.title'),
                 'url'    => ['/orders'],
-                'active' => Yii::$app->controller->id == 'default'
+                'active' => Yii::$app->controller->id == 'orders'
             ],
         ],
         'options' => ['class' => 'navbar-nav'],

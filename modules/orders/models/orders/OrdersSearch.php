@@ -142,7 +142,7 @@ class OrdersSearch extends Orders
                     'mode'       => null,
                     'service_id' => null
                 ]),
-                'active' => is_null($this->status)
+                'active' => $this->status === null
             ]
         ];
 
@@ -172,7 +172,7 @@ class OrdersSearch extends Orders
                     ' (' . Orders::getTotal_count() . ')',
                 'url'     => Url::current(['service_id' => null]),
                 'options' => [
-                    'class' => is_null($this->service_id) ? 'active' : ''
+                    'class' => $this->service_id === null ? 'active' : ''
                 ]
             ]
         ];
@@ -203,7 +203,7 @@ class OrdersSearch extends Orders
                 'label'  => Yii::t('app', 'orders.modes.all'),
                 'url'    => Url::current(['mode' => null]),
                 'options' => [
-                    'class' => is_null($this->mode) ? 'active' : ''
+                    'class' => $this->mode === null ? 'active' : ''
                 ]
             ]
         ];

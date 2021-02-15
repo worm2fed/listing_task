@@ -17,7 +17,7 @@ class MessageSource extends \yii\i18n\PhpMessageSource
     {
         $result = parent::loadMessagesFromFile($messageFile);
 
-        if (!is_null($result)) {
+        if ($result !== null) {
             $result = self::convertArray($result);
         }
 

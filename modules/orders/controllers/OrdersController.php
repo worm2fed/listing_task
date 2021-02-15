@@ -9,9 +9,9 @@ use app\modules\orders\models\orders\OrdersSearch;
 use app\modules\orders\models\services\Services;
 
 /**
- * [Description DefaultController]
+ * This controller defines actions to list, filter and export orders
  */
-class DefaultController extends Controller
+class OrdersController extends Controller
 {
     public $layout = 'main';
 

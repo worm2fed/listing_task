@@ -18,7 +18,7 @@ $config = [
             'class' => 'app\modules\orders\orders',
         ],
     ],
-    'defaultRoute' => 'orders',
+    'defaultRoute' => 'orders/orders',
     'components' => [
         'i18n' => [
             'translations' => [
@@ -60,8 +60,8 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                '/orders' => 'orders/default/index',
-                '/orders/export' => 'orders/default/export',
+                '/orders' => 'orders/orders/index',
+                '/orders/export' => 'orders/orders/export',
             ]
         ],
     ],
