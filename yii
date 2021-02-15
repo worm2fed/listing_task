@@ -8,14 +8,12 @@
  * @license http://www.yiiframework.com/license/
  */
 
-defined('YII_DEBUG') or define('YII_DEBUG', true);
-defined('YII_ENV') or define('YII_ENV', 'dev');
-
 require __DIR__ . '/vendor/autoload.php';
+
+$config = new codemix\yii2confload\Config(__DIR__);
+
 require __DIR__ . '/vendor/yiisoft/yii2/Yii.php';
 
-$config = require __DIR__ . '/config/console.php';
-
-$application = new yii\console\Application($config);
+$application = new yii\console\Application($config->console());
 $exitCode = $application->run();
 exit($exitCode);

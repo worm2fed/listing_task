@@ -24,21 +24,7 @@ The minimum requirement by this project is PHP 7.2+ and mysql 5.7+
 
 ## CONFIGURATION
 
-Create the file `config/local/db.php` with your sensitive data, for example:
-
-```php
-<?php
-
-define('DB_HOST', 'localhost');
-define('DB_NAME', 'listing_task');
-define('DB_USER', 'listing_task');
-define('DB_PASSWORD', 'listing_task');
-```
-
-**NOTES:**
-
-- Yii won't create the database for you, this has to be done manually before you can access it.
-- Check and edit the other files in the `config/` directory to customize your application as required.
+Create the env file `.env` with all main settings according to example file `.env.example`
 
 ## RUNNING
 
@@ -57,17 +43,6 @@ Start the container
 You can then access the application through the following URL:
 
     http://127.0.0.1:8000
-
-Create database and user you've specified in `config/local/db.php` (mysql root password your can find in mysql container log).
-
-    docker exec -it listing_task_mysql mysql -uroot -pPASSWORD_FROM_LOG
-
-Then
-
-    CREATE DATABASE listing_task;
-    CREATE USER 'listing_task'@'%' IDENTIFIED BY 'listing_task';
-    GRANT ALL PRIVILEGES ON listing_task.* TO 'listing_task';
-    exit
 
 Unzip `sql/test_db_data.sql.zip` to the same folder (do not change name!)
 

@@ -1,3 +1,7 @@
+# local env and db
+.env
+db/
+
 # ide
 .idea
 nbproject

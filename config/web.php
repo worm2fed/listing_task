@@ -1,5 +1,7 @@
 <?php
 
+/* @var codemix\yii2confload\Config $this */
+
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
@@ -8,7 +10,7 @@ $config = [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'sourceLanguage' => 'code',
-    'language' => 'en',
+    'language' => self::env('LANGUAGE', 'en'),
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',

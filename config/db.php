@@ -1,12 +1,13 @@
 <?php
 
-$db = require __DIR__ . '/local/db.php';
+/* @var codemix\yii2confload\Config $this */
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=' . DB_HOST . ';dbname=' . DB_NAME,
-    'username' => DB_USER,
-    'password' => DB_PASSWORD,
+    'dsn' => 'mysql:host=' . self::env('DB_HOST', 'localhost') . ';' .
+        'dbname=' . self::env('DB_NAME', 'listing_task'),
+    'username' => self::env('DB_USER', 'listing_task'),
+    'password' => self::env('DB_PASSWORD', 'listing_task'),
     'charset' => 'utf8',
 
     // Schema cache options (for production environment)
