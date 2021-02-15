@@ -9,6 +9,7 @@ services:
       - ${APP_DIR}:/app:delegated
     links:
       - mysql
+    hostname: ${APP_HOST}
     ports:
       - "${APP_PORT}:80"
     depends_on:
