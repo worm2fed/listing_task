@@ -34,7 +34,8 @@ $gridColumns = [
         'contentOptions' => ['class' => 'service'],
         'headerOptions' => ['class' => 'dropdown-th'],
         'header' => ServicesFilterWidget::widget([
-            'label' => Yii::t('app', 'orders.labels.service')
+            'label' => Yii::t('app', 'orders.labels.service'),
+            'services' => $services
         ])
     ],
     [

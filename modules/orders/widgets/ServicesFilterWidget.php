@@ -19,7 +19,12 @@ class ServicesFilterWidget extends Widget
     /**
      * @var string button label
      */
-    public $label;
+    public string $label;
+
+    /**
+     * @var array with all services and corresponding orders count
+     */
+    public array $services;
 
     /**
      * {@inheritdoc}
@@ -61,13 +66,13 @@ class ServicesFilterWidget extends Widget
             ]
         ];
 
-        foreach (Services::find()->all() as $item) {
+        foreach ($this->services as $id => $service) {
             array_push($items, [
                 'label' => '<span class="label-id">' .
-                    $item->ordersCount . '</span> ' . $item->name,
-                'url' => Url::current(['service_id' => $item->id]),
+                    $service['orders_count'] . '</span> ' . $service['name'],
+                'url' => Url::current(['service_id' => $id]),
                 'options' => [
-                    'class' => Yii::$app->request->get('service_id') === strval($item->id)
+                    'class' => Yii::$app->request->get('service_id') === strval($id)
                         ? 'active' : ''
                 ]
             ]);
