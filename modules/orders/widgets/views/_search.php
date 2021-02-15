@@ -13,8 +13,8 @@ use yii\widgets\ActiveForm;
 ?>
 
 <?php $form = ActiveForm::begin([
-    'action'  => $action,
-    'method'  => $method,
+    'action' => $action,
+    'method' => $method,
     'options' => ['class' => 'form-inline']
 ]); ?>
 
@@ -23,7 +23,7 @@ use yii\widgets\ActiveForm;
         'search',
         Yii::$app->request->get('search'),
         [
-            'class'       => 'form-control',
+            'class' => 'form-control',
             'placeholder' => Yii::t('app', 'orders.search.placeholder')
         ]
     ) ?>
@@ -34,13 +34,13 @@ use yii\widgets\ActiveForm;
         <?= Html::dropDownList(
             'search_type',
             Yii::$app->request->get('search_type'),
-            OrdersSearch::search_types(),
+            OrdersSearch::getSearchTypes(),
             ['class' => 'form-control search-select']
         ) ?>
 
         <?= Html::submitButton(
             Html::tag('span', '', [
-                'class'       => 'glyphicon glyphicon-search',
+                'class' => 'glyphicon glyphicon-search',
                 'aria-hidden' => 'true'
             ]),
             ['class' => 'btn btn-default']

@@ -16,7 +16,8 @@ class OrdersController extends Controller
     public $layout = 'main';
 
     /**
-     * Lists all Orders models (with filters applied).
+     * Lists all Orders models (with filters applied)
+     * 
      * @return mixed
      */
     public function actionIndex()
@@ -32,7 +33,8 @@ class OrdersController extends Controller
     }
 
     /**
-     * Exports all Orders models (with filters applied).
+     * Exports all Orders models (with filters applied)
+     * 
      * @return mixed
      */
     public function actionExport()

@@ -13,10 +13,12 @@ class SearchWidget extends Widget
      * @var app\modules\orders\models\OrdersSearch
      */
     public $model;
+
     /**
      * @var string
      */
     public $action;
+
     /**
      * @var string
      */
@@ -36,7 +38,7 @@ class SearchWidget extends Widget
     public function run()
     {
         return $this->render('_search', [
-            'model'  => $this->model,
+            'model' => $this->model,
             'action' => $this->action,
             'method' => $this->method,
         ]);

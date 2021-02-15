@@ -5,14 +5,16 @@ namespace app\components;
 use yii\i18n\MissingTranslationEvent;
 
 /**
- * [Description TranslationEventHandler]
+ * This class defines handler for missing translations
  */
 class TranslationEventHandler
 {
     /**
+     * This is missing translation handler
+     * 
      * @param MissingTranslationEvent $event
      * 
-     * @return [type]
+     * @return void
      */
     public static function handleMissingTranslation(
         MissingTranslationEvent $event

@@ -16,24 +16,31 @@ use app\modules\orders\models\services\Services;
  */
 class OrdersSearch extends Orders
 {
-    public const SEARCH_TYPE_ID       = 1;
-    public const SEARCH_TYPE_LINK     = 2;
+    public const SEARCH_TYPE_ID = 1;
+    public const SEARCH_TYPE_LINK = 2;
     public const SEARCH_TYPE_USERNAME = 3;
 
     /**
-     * @return array
+     * @var string to search
      */
-    public static function search_types()
+    public $search;
+
+    /**
+     * @var int type of searching field
+     */
+    public $search_type;
+
+    /**
+     * @return array with search types as keys and text representation as values
+     */
+    public static function getSearchTypes()
     {
         return [
-            self::SEARCH_TYPE_ID       => Yii::t('app', 'orders.search.types.id'),
-            self::SEARCH_TYPE_LINK     => Yii::t('app', 'orders.search.types.link'),
+            self::SEARCH_TYPE_ID => Yii::t('app', 'orders.search.types.id'),
+            self::SEARCH_TYPE_LINK => Yii::t('app', 'orders.search.types.link'),
             self::SEARCH_TYPE_USERNAME => Yii::t('app', 'orders.search.types.username'),
         ];
     }
-
-    public $search;
-    public $search_type;
 
     /**
      * {@inheritdoc}
@@ -44,9 +51,9 @@ class OrdersSearch extends Orders
             [['service_id', 'status', 'mode', 'search_type'], 'integer'],
             [['link', 'search'], 'safe'],
 
-            ['status', 'in', 'range' => array_keys(Orders::statuses())],
-            ['mode', 'in', 'range' => array_keys(Orders::modes())],
-            ['search_type', 'in', 'range' => array_keys(self::search_types())]
+            ['status', 'in', 'range' => array_keys(Orders::getStatuses())],
+            ['mode', 'in', 'range' => array_keys(Orders::getModes())],
+            ['search_type', 'in', 'range' => array_keys(self::getSearchTypes())]
         ];
     }
 
@@ -61,9 +68,10 @@ class OrdersSearch extends Orders
 
     /**
      * Builds query for searching
-     * @param array $params
+     * 
+     * @param array $params for filtering
      *
-     * @return \app\modules\orders\models\orders\OrdersQuery
+     * @return OrdersQuery with filters applied
      */
     public function buildQuery(array $params)
     {
@@ -82,8 +90,8 @@ class OrdersSearch extends Orders
         // filtering conditions
         $query->andFilterWhere([
             'service_id' => $this->service_id,
-            'status'     => $this->status,
-            'mode'       => $this->mode,
+            'status' => $this->status,
+            'mode' => $this->mode,
         ]);
 
         if (isset($this->search_type) && isset($this->search)) {
@@ -113,45 +121,73 @@ class OrdersSearch extends Orders
     /**
      * Creates data provider instance with search query applied
      *
-     * @param array $params
+     * @param array $params for filtering
      *
      * @return ActiveDataProvider
      */
     public function search(array $params)
     {
         return new ActiveDataProvider([
-            'query'      => $this->buildQuery($params),
+            'query' => $this->buildQuery($params),
             'pagination' => ['pageSize' => 100],
-            'sort'       => [
+            'sort' => [
                 'defaultOrder' => ['id' => SORT_DESC],
-                'attributes'   => ['id']
+                'attributes' => ['id']
             ]
         ]);
     }
 
     /**
-     * @return array
+     * @return array with modes for statuses filter
+     */
+    public function getModesFilterItems(): array
+    {
+        $items = [
+            [
+                'label' => Yii::t('app', 'orders.modes.all'),
+                'url' => Url::current(['mode' => null]),
+                'options' => [
+                    'class' => $this->mode === null ? 'active' : ''
+                ]
+            ]
+        ];
+
+        foreach (Orders::getModes() as $key => $value) {
+            array_push($items, [
+                'label' => $value,
+                'url' => Url::current(['mode' => $key]),
+                'options' => [
+                    'class' => $this->mode === strval($key) ? 'active' : ''
+                ]
+            ]);
+        }
+
+        return $items;
+    }
+
+    /**
+     * @return array with items for statuses filter
      */
     public function getStatusesFilterItems(): array
     {
         $items = [
             [
-                'label'  => Yii::t('app', 'orders.statuses.all'),
-                'url'    => Url::current([
-                    'status'     => null,
-                    'mode'       => null,
+                'label' => Yii::t('app', 'orders.statuses.all'),
+                'url' => Url::current([
+                    'status' => null,
+                    'mode' => null,
                     'service_id' => null
                 ]),
                 'active' => $this->status === null
             ]
         ];
 
-        foreach (Orders::statuses() as $key => $value) {
+        foreach (Orders::getStatuses() as $key => $value) {
             array_push($items, [
-                'label'  => $value,
-                'url'    => Url::current([
-                    'status'     => $key,
-                    'mode'       => null,
+                'label' => $value,
+                'url' => Url::current([
+                    'status' => $key,
+                    'mode' => null,
                     'service_id' => null
                 ]),
                 'active' => $this->status === strval($key)
@@ -162,15 +198,15 @@ class OrdersSearch extends Orders
     }
 
     /**
-     * @return array
+     * @return array with items for services filter
      */
     public function getServicesFilterItems(): array
     {
         $items = [
             [
-                'label'   => Yii::t('app', 'orders.services.all') .
+                'label' => Yii::t('app', 'orders.services.all') .
                     ' (' . Orders::getTotalCount() . ')',
-                'url'     => Url::current(['service_id' => null]),
+                'url' => Url::current(['service_id' => null]),
                 'options' => [
                     'class' => $this->service_id === null ? 'active' : ''
                 ]
@@ -179,9 +215,9 @@ class OrdersSearch extends Orders
 
         foreach (Services::find()->all() as $item) {
             array_push($items, [
-                'label'   => '<span class="label-id">' .
-                    $item->orders_count . '</span> ' . $item->name,
-                'url'     => Url::current(['service_id' => $item->id]),
+                'label' => '<span class="label-id">' .
+                    $item->ordersCount . '</span> ' . $item->name,
+                'url' => Url::current(['service_id' => $item->id]),
                 'options' => [
                     'class' => $this->service_id === strval($item->id)
                         ? 'active' : ''
@@ -189,34 +225,6 @@ class OrdersSearch extends Orders
             ]);
         }
         ArrayHelper::multisort($items, 'count', SORT_DESC);
-
-        return $items;
-    }
-
-    /**
-     * @return array
-     */
-    public function getModesFilterItems(): array
-    {
-        $items = [
-            [
-                'label'  => Yii::t('app', 'orders.modes.all'),
-                'url'    => Url::current(['mode' => null]),
-                'options' => [
-                    'class' => $this->mode === null ? 'active' : ''
-                ]
-            ]
-        ];
-
-        foreach (Orders::modes() as $key => $value) {
-            array_push($items, [
-                'label'  => $value,
-                'url'    => Url::current(['mode' => $key]),
-                'options' => [
-                    'class' => $this->mode === strval($key) ? 'active' : ''
-                ]
-            ]);
-        }
 
         return $items;
     }

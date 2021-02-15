@@ -3,7 +3,7 @@
 namespace app\modules\orders\models\users;
 
 /**
- * This is the ActiveQuery class for [[Users]].
+ * This is the ActiveQuery class for Users.
  *
  * @see Users
  */
@@ -11,6 +11,7 @@ class UsersQuery extends \yii\db\ActiveQuery
 {
     /**
      * {@inheritdoc}
+     * 
      * @return Users[]|array
      */
     public function all($db = null)
@@ -20,6 +21,7 @@ class UsersQuery extends \yii\db\ActiveQuery
 
     /**
      * {@inheritdoc}
+     * 
      * @return Users|array|null
      */
     public function one($db = null)

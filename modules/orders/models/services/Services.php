@@ -39,13 +39,14 @@ class Services extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id'   => Yii::t('app', 'orders.labels.id'),
+            'id' => Yii::t('app', 'orders.labels.id'),
             'name' => Yii::t('app', 'orders.labels.name'),
         ];
     }
 
     /**
      * {@inheritdoc}
+     * 
      * @return ServicesQuery the active query used by this AR class.
      */
     public static function find()
@@ -53,6 +54,9 @@ class Services extends \yii\db\ActiveRecord
         return new ServicesQuery(get_called_class());
     }
 
+    /**
+     * @return Orders all orders according to current service
+     */
     public function getOrders()
     {
         return $this->hasMany(
@@ -62,19 +66,27 @@ class Services extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return int|string
+     * @return int counts orders according to current service
      */
-    public function getOrders_count()
+    public function getOrdersCount()
     {
-        return Orders::find()->where(['service_id' => $this->id])->count();
+        return (int) Orders::find()
+            ->where(['service_id' => $this->id])
+            ->count();
     }
 
-    public static function getServicesArray()
+    /**
+     * Get all services in array
+     * 
+     * @return array which have ids as keys 
+     * and stores only name and orders count
+     */
+    public static function getServicesArray(): array
     {
         $services = [];
         foreach (self::find()->all() as $service) {
             $services[$service->id] = [
-                'orders_count' => $service->orders_count,
+                'orders_count' => $service->ordersCount,
                 'name' => $service->name
             ];
         }

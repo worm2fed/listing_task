@@ -24,10 +24,26 @@ class MessageSource extends \yii\i18n\PhpMessageSource
         return $result;
     }
 
-    private static function convertArray(array $array): array
+    /**
+     * This method converts nested array to one dimensional one, where its 
+     * keys separated by dots
+     * 
+     * Example
+     * $nestedArray = [
+     *     'one' => [
+     *         'two' => 'three'
+     *     ]
+     * ];
+     * $array = convertArray($nestedArray); // '[one.two' => 'three']
+     * 
+     * @param array $nestedArray to convert
+     * 
+     * @return array
+     */
+    private static function convertArray(array $nestedArray): array
     {
         $iterator = new RecursiveIteratorIterator(
-            new RecursiveArrayIterator($array),
+            new RecursiveArrayIterator($nestedArray),
             RecursiveIteratorIterator::SELF_FIRST
         );
         $path = $result = [];

@@ -42,17 +42,17 @@ OrdersAsset::register($this);
     <?php $this->beginBody() ?>
 
     <?php NavBar::begin([
-        'options'               => [
+        'options' => [
             'class' => 'navbar navbar-fixed-top navbar-default'
         ],
         'innerContainerOptions' => ['class' => 'container-fluid'],
     ]) ?>
 
     <?= Nav::widget([
-        'items'   => [
+        'items' => [
             [
-                'label'  => Yii::t('app', 'orders.title'),
-                'url'    => ['/orders'],
+                'label' => Yii::t('app', 'orders.title'),
+                'url' => ['/orders'],
                 'active' => Yii::$app->controller->id == 'orders'
             ],
         ],

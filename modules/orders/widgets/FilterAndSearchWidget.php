@@ -29,7 +29,7 @@ class FilterAndSearchWidget extends Widget
     public function run()
     {
         return $this->render('_filter_and_search', [
-            'model'  => $this->model
+            'model' => $this->model
         ]);
     }
 }

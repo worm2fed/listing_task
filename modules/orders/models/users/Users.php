@@ -12,7 +12,7 @@ use app\modules\orders\models\orders\Orders;
  * @property int $id
  * @property string $first_name
  * @property string $last_name
- * @property string $full_name
+ * @property string $fullName
  */
 class Users extends \yii\db\ActiveRecord
 {
@@ -41,17 +41,16 @@ class Users extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id'         => Yii::t('app', 'orders.labels.id'),
+            'id' => Yii::t('app', 'orders.labels.id'),
             'first_name' => Yii::t('app', 'orders.labels.first_name'),
-            'last_name'  => Yii::t('app', 'orders.labels.last_name'),
-
-            'full_name'  => Yii::t('app', 'orders.labels.full_name'),
+            'last_name' => Yii::t('app', 'orders.labels.last_name'),
         ];
     }
 
     /**
      * {@inheritdoc}
-     * @return UsersQuery the active query used by this AR class.
+     * 
+     * @return UsersQuery the active query used by this AR class
      */
     public static function find()
     {
@@ -59,13 +58,16 @@ class Users extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return string
+     * @return string user's full name
      */
-    public function getFull_name()
+    public function getFullName()
     {
-        return $this->first_name . ' ' . $this->last_name;
+        return trim($this->first_name . ' ' . $this->last_name);
     }
 
+    /**
+     * @return Orders all orders according to current user
+     */
     public function getOrders()
     {
         return $this->hasMany(

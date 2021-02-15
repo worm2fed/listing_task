@@ -3,7 +3,7 @@
 namespace app\modules\orders\models\orders;
 
 /**
- * This is the ActiveQuery class for [[Orders]].
+ * This is the ActiveQuery class for Orders.
  *
  * @see Orders
  */
@@ -11,6 +11,7 @@ class OrdersQuery extends \yii\db\ActiveQuery
 {
     /**
      * {@inheritdoc}
+     * 
      * @return Orders[]|array
      */
     public function all($db = null)
@@ -20,6 +21,7 @@ class OrdersQuery extends \yii\db\ActiveQuery
 
     /**
      * {@inheritdoc}
+     * 
      * @return Orders|array|null
      */
     public function one($db = null)

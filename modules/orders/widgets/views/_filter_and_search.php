@@ -11,17 +11,17 @@ use app\modules\orders\widgets\SearchWidget;
 
 <?= Menu::widget([
     'options' => ['class' => 'nav nav-tabs p-b'],
-    'items'   => array_merge(
+    'items' => array_merge(
         $model->getStatusesFilterItems(),
         [[
-            'label'    => SearchWidget::widget([
-                'model'  => $model,
+            'label' => SearchWidget::widget([
+                'model' => $model,
                 'action' => Url::toRoute(['/orders']),
                 'method' => 'get',
             ]),
-            'options'  => ['class' => 'pull-right custom-search'],
+            'options' => ['class' => 'pull-right custom-search'],
             'template' => '{label}',
-            'encode'   => false
+            'encode' => false
         ]]
     )
 ]) ?>
