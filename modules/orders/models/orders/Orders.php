@@ -4,6 +4,7 @@ namespace app\modules\orders\models\orders;
 
 use Yii;
 
+use app\components\DateTimeTools;
 use app\components\UnbufferedConnection;
 use app\modules\orders\models\services\Services;
 use app\modules\orders\models\users\Users;
@@ -108,20 +109,9 @@ class Orders extends \yii\db\ActiveRecord
     /**
      * @return array
      */
-    public static function formateCreatedAt(int $created_at): array
+    public function getFormattedCreatedAt(): array
     {
-        $dt = new \DateTime();
-        $dt->setTimestamp($created_at);
-
-        return [$dt->format('Y-m-d'), $dt->format('H:m:s')];
-    }
-
-    /**
-     * @return array
-     */
-    public function getFormateCreatedAt(): array
-    {
-        return self::formateCreatedAt($this->created_at);
+        return DateTimeTools::formatTimestamp($this->created_at);
     }
 
     public function getStatusName(): string
@@ -145,11 +135,11 @@ class Orders extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return int|string
+     * @return int
      */
-    public static function getTotal_count(): int
+    public static function getTotalCount(): int
     {
-        return self::find()->count();
+        return (int) self::find()->count();
     }
 
     public static function export(OrdersQuery $query)
@@ -179,7 +169,7 @@ class Orders extends \yii\db\ActiveRecord
                 $service['orders_count'] . ' ' . $service['name'],
                 self::statuses()[$data['status']],
                 self::modes()[$data['mode']],
-                implode(' ', self::formateCreatedAt($data['created_at'])),
+                implode(' ', DateTimeTools::formatTimestamp($data['created_at'])),
             ];
             fputcsv($file, $raw);
         }

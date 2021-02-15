@@ -12,7 +12,7 @@ use app\modules\orders\widgets\SaveWidget;
 /* @var $services array */
 
 $this->title = Yii::t('app', 'orders.title');
-$grid_columns = [
+$gridColumns = [
     'id',
     [
         'attribute' => 'user',
@@ -61,9 +61,11 @@ $grid_columns = [
     [
         'attribute' => 'created_at',
         'content'   => function ($order) {
-            [$date, $time] = $order->getFormateCreatedAt();
-            return '<span class="nowrap">' . $date . '</span>' .
-                '<span class="nowrap">' . $time . '</span>';
+            $created = '';
+            foreach ($order->getFormattedCreatedAt() as $element) {
+                $created .= '<span class="nowrap">' . $element . '</span>';
+            }
+            return $created;
         }
     ],
 ];
@@ -84,7 +86,7 @@ $grid_columns = [
         </div>',
         'summary'        => '{begin} to {end} of {totalCount}',
         'filterPosition' => null,
-        'columns'        => $grid_columns,
+        'columns'        => $gridColumns,
         'tableOptions'   => ['class' => 'table order-table'],
         'options'        => ['tag' => null]
     ]); ?>

@@ -28,7 +28,11 @@ $config = [
                     'on missingTranslation' => [
                         'app\components\TranslationEventHandler',
                         'handleMissingTranslation'
-                    ]
+                    ],
+                    'fileMap' => [
+                        'app'       => 'app.php',
+                        'app/error' => 'error.php',
+                    ],
                 ]
             ],
         ],

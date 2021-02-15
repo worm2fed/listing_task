@@ -3,6 +3,7 @@
 namespace app\components;
 
 use PDO;
+use Exception;
 use Yii;
 use yii\db\Connection;
 
@@ -31,7 +32,7 @@ class UnbufferedConnection
 
     public function __wakeup()
     {
-        throw new \Exception("Cannot unserialize a singleton.");
+        throw new Exception("Cannot unserialize a singleton.");
     }
 
     public static function getInstance(): Connection

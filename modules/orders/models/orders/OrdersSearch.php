@@ -169,7 +169,7 @@ class OrdersSearch extends Orders
         $items = [
             [
                 'label'   => Yii::t('app', 'orders.services.all') .
-                    ' (' . Orders::getTotal_count() . ')',
+                    ' (' . Orders::getTotalCount() . ')',
                 'url'     => Url::current(['service_id' => null]),
                 'options' => [
                     'class' => $this->service_id === null ? 'active' : ''

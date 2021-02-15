@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Translation map for en-US
+ * Translation map for en app
  */
 return [
     'orders' => [
