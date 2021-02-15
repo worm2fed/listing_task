@@ -20,9 +20,9 @@ class OrdersExport extends OrdersSearch
      * 
      * @return resource|false 
      */
-    public static function export(OrdersQuery $query)
+    public function export(OrdersQuery $query)
     {
-        $services = Services::getServicesArray();
+        $services = Services::getServicesArray(false);
         $columns = [
             Yii::t('app', 'orders.labels.id'),
             Yii::t('app', 'orders.labels.user'),
@@ -37,17 +37,16 @@ class OrdersExport extends OrdersSearch
         $file = fopen('php://memory', 'wb');
         fputcsv($file, $columns);
 
-        foreach ($query->asArray()->each(1000, UnbufferedConnection::getInstance()) as $data) {
-            $service = $services[$data['service_id']];
+        foreach ($query->asArray()->each(1000, UnbufferedConnection::getConnection()) as $data) {
             $raw = [
                 $data['id'],
-                $data['user']['first_name'] . ' ' . $data['user']['last_name'],
+                $data['full_name'],
                 $data['link'],
                 $data['quantity'],
-                $service['orders_count'] . ' ' . $service['name'],
+                $services[$data['service_id']],
                 self::getStatuses()[$data['status']],
                 self::getModes()[$data['mode']],
-                implode(' ', DateTimeTools::formatTimestamp($data['created_at'])),
+                DateTimeTools::formatTimestamp($data['created_at'], false)
             ];
             fputcsv($file, $raw);
         }

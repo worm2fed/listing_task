@@ -9,7 +9,7 @@ use app\modules\orders\models\services\Services;
 use app\modules\orders\models\users\Users;
 
 /**
- * This is the model class for table "orders".
+ * This is the model class for table "orders"
  *
  * @property int $id
  * @property int $user_id

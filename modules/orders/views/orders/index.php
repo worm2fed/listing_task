@@ -1,9 +1,11 @@
 <?php
 
-use yii\bootstrap\ButtonDropdown;
 use yii\grid\GridView;
+use yii\helpers\Url;
 
 use app\modules\orders\widgets\FilterAndSearchWidget;
+use app\modules\orders\widgets\ModesFilterWidget;
+use app\modules\orders\widgets\ServicesFilterWidget;
 use app\modules\orders\widgets\SaveWidget;
 
 /* @var $this yii\web\View */
@@ -31,13 +33,8 @@ $gridColumns = [
         },
         'contentOptions' => ['class' => 'service'],
         'headerOptions' => ['class' => 'dropdown-th'],
-        'header' => ButtonDropdown::widget([
-            'label' => Yii::t('app', 'orders.labels.service'),
-            'options' => ['class' => 'btn btn-th btn-default dropdown-toggle'],
-            'dropdown' => [
-                'encodeLabels' => false,
-                'items' => $searchModel->getServicesFilterItems(),
-            ],
+        'header' => ServicesFilterWidget::widget([
+            'label' => Yii::t('app', 'orders.labels.service')
         ])
     ],
     [
@@ -52,10 +49,8 @@ $gridColumns = [
             return $order->getModeName();
         },
         'headerOptions' => ['class' => 'dropdown-th'],
-        'header' => ButtonDropdown::widget([
-            'label' => Yii::t('app', 'orders.labels.mode'),
-            'options' => ['class' => 'btn btn-th btn-default dropdown-toggle'],
-            'dropdown' => ['items' => $searchModel->getModesFilterItems()],
+        'header' => ModesFilterWidget::widget([
+            'label' => Yii::t('app', 'orders.labels.mode')
         ])
     ],
     [
@@ -72,7 +67,10 @@ $gridColumns = [
 ?>
 
 <div class="container-fluid">
-    <?= FilterAndSearchWidget::widget(['model'  => $searchModel,]) ?>
+    <?= FilterAndSearchWidget::widget([
+        'model'  => $searchModel,
+        'searchAction' => Url::toRoute(['/orders'])
+    ]) ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

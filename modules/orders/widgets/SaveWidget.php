@@ -2,7 +2,9 @@
 
 namespace app\modules\orders\widgets;
 
+use Yii;
 use yii\base\Widget;
+use yii\helpers\Html;
 
 /**
  * This widgets generates menu for orders to filter orders statuses 
@@ -23,6 +25,9 @@ class SaveWidget extends Widget
      */
     public function run()
     {
-        return $this->render('_save');
+        return Html::a(
+            Yii::t('app', 'orders.save'),
+            array_merge(['/orders/export'], Yii::$app->request->get())
+        );
     }
 }

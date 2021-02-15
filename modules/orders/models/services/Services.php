@@ -78,17 +78,25 @@ class Services extends \yii\db\ActiveRecord
     /**
      * Get all services in array
      * 
+     * @param string $asArray, default is true, whether return content as 
+     *     array or string
+     * 
      * @return array which have ids as keys 
      * and stores only name and orders count
      */
-    public static function getServicesArray(): array
+    public static function getServicesArray(bool $asArray = true): array
     {
         $services = [];
         foreach (self::find()->all() as $service) {
-            $services[$service->id] = [
-                'orders_count' => $service->ordersCount,
-                'name' => $service->name
-            ];
+            if ($asArray) {
+                $services[$service->id] = [
+                    'orders_count' => $service->ordersCount,
+                    'name' => $service->name
+                ];
+            } else {
+                $services[$service->id] =
+                    '(' . $service->ordersCount . ') ' . $service->name;
+            }
         }
         return $services;
     }

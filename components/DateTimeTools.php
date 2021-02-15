@@ -28,27 +28,32 @@ class DateTimeTools
      * Formats timestamp to tuple according to provided format
      * 
      * @param $timestamp
+     * @param string $asArray, default is true, whether return array or string
      * @param string $dateFormat, default is 'Y-m-d'
-     * @param string $timeFormat, default is ''H:m:s'
+     * @param string $timeFormat, default is 'H:m:s'
      * 
-     * @return array with formatted [date, time] 
-     * or returns singleton array ['not set'] if $timestamp is null 
-     * or returns singleton array ['not valid'] if $timestamp is not valid 
+     * @return array|string with formatted [date, time] (or 'date time')
+     *     or returns ['not set'] if $timestamp is null (or 'not set')
+     *     or returns ['not valid'] if $timestamp is not valid (or 'not valid') 
      */
     public static function formatTimestamp(
         $timestamp,
+        bool $asArray = true,
         string $dateFormat = 'Y-m-d',
         string $timeFormat = 'H:m:s'
-    ): array {
-        if ($timestamp === null) {
-            return [Yii::t('app/error', 'datetime.not_set')];
-        } elseif (!self::isValidTimestamp($timestamp)) {
-            return [Yii::t('app/error', 'datetime.not_valid')];
+    ) {
+        $result = [Yii::t('app/error', 'datetime.not_set')];
+        if (!self::isValidTimestamp($timestamp)) {
+            $result = [Yii::t('app/error', 'datetime.not_valid')];
+        } else {
+            $dt = new DateTime();
+            $dt->setTimestamp($timestamp);
+            $result = [$dt->format($dateFormat), $dt->format($timeFormat)];
         }
 
-        $dt = new DateTime();
-        $dt->setTimestamp($timestamp);
-
-        return [$dt->format($dateFormat), $dt->format($timeFormat)];
+        if ($asArray) {
+            return $result;
+        }
+        return implode(' ', $result);
     }
 }

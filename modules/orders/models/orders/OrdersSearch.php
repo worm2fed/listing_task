@@ -5,11 +5,9 @@ namespace app\modules\orders\models\orders;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 
 use app\modules\orders\models\orders\Orders;
-use app\modules\orders\models\services\Services;
 
 /**
  * OrdersSearch represents the model behind the search form of `app\modules\orders\models\orders\Orders`.
@@ -87,6 +85,11 @@ class OrdersSearch extends Orders
             return $query;
         }
 
+        $query->addSelect([
+            'orders.*',
+            'CONCAT_WS(" ", users.first_name, users.last_name) AS full_name'
+        ]);
+
         // filtering conditions
         $query->andFilterWhere([
             'service_id' => $this->service_id,
@@ -104,11 +107,7 @@ class OrdersSearch extends Orders
                     $query->andFilterWhere(['like', 'link', $this->search]);
                     break;
                 case self::SEARCH_TYPE_USERNAME:
-                    $query->andFilterWhere([
-                        'like',
-                        'CONCAT_WS(" ", users.first_name, users.last_name)',
-                        $this->search,
-                    ]);
+                    $query->andHaving(['like', 'full_name', $this->search]);
                     break;
                 default:
                     break;
@@ -135,97 +134,5 @@ class OrdersSearch extends Orders
                 'attributes' => ['id']
             ]
         ]);
-    }
-
-    /**
-     * @return array with modes for statuses filter
-     */
-    public function getModesFilterItems(): array
-    {
-        $items = [
-            [
-                'label' => Yii::t('app', 'orders.modes.all'),
-                'url' => Url::current(['mode' => null]),
-                'options' => [
-                    'class' => $this->mode === null ? 'active' : ''
-                ]
-            ]
-        ];
-
-        foreach (Orders::getModes() as $key => $value) {
-            array_push($items, [
-                'label' => $value,
-                'url' => Url::current(['mode' => $key]),
-                'options' => [
-                    'class' => $this->mode === strval($key) ? 'active' : ''
-                ]
-            ]);
-        }
-
-        return $items;
-    }
-
-    /**
-     * @return array with items for statuses filter
-     */
-    public function getStatusesFilterItems(): array
-    {
-        $items = [
-            [
-                'label' => Yii::t('app', 'orders.statuses.all'),
-                'url' => Url::current([
-                    'status' => null,
-                    'mode' => null,
-                    'service_id' => null
-                ]),
-                'active' => $this->status === null
-            ]
-        ];
-
-        foreach (Orders::getStatuses() as $key => $value) {
-            array_push($items, [
-                'label' => $value,
-                'url' => Url::current([
-                    'status' => $key,
-                    'mode' => null,
-                    'service_id' => null
-                ]),
-                'active' => $this->status === strval($key)
-            ]);
-        }
-
-        return $items;
-    }
-
-    /**
-     * @return array with items for services filter
-     */
-    public function getServicesFilterItems(): array
-    {
-        $items = [
-            [
-                'label' => Yii::t('app', 'orders.services.all') .
-                    ' (' . Orders::getTotalCount() . ')',
-                'url' => Url::current(['service_id' => null]),
-                'options' => [
-                    'class' => $this->service_id === null ? 'active' : ''
-                ]
-            ]
-        ];
-
-        foreach (Services::find()->all() as $item) {
-            array_push($items, [
-                'label' => '<span class="label-id">' .
-                    $item->ordersCount . '</span> ' . $item->name,
-                'url' => Url::current(['service_id' => $item->id]),
-                'options' => [
-                    'class' => $this->service_id === strval($item->id)
-                        ? 'active' : ''
-                ]
-            ]);
-        }
-        ArrayHelper::multisort($items, 'count', SORT_DESC);
-
-        return $items;
     }
 }

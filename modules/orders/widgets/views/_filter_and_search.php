@@ -1,22 +1,23 @@
 <?php
 
-use yii\helpers\Url;
 use yii\widgets\Menu;
 
 use app\modules\orders\widgets\SearchWidget;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\orders\models\OrdersSearch */
+/* @var $searchAction string */
+/* @var $statusesFilterItems array */
 ?>
 
 <?= Menu::widget([
     'options' => ['class' => 'nav nav-tabs p-b'],
     'items' => array_merge(
-        $model->getStatusesFilterItems(),
+        $statusesFilterItems,
         [[
             'label' => SearchWidget::widget([
                 'model' => $model,
-                'action' => Url::toRoute(['/orders']),
+                'action' => $searchAction,
                 'method' => 'get',
             ]),
             'options' => ['class' => 'pull-right custom-search'],

@@ -46,7 +46,7 @@ class OrdersController extends Controller
         );
 
         return Yii::$app->response->sendStreamAsFile(
-            $exportModel::export($query),
+            $exportModel->export($query),
             'orders_' . time() . '.csv',
             ['mimeType' => 'text/csv']
         );

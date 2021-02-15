@@ -15,12 +15,12 @@ class SearchWidget extends Widget
     public $model;
 
     /**
-     * @var string
+     * @var string action url for searching
      */
     public $action;
 
     /**
-     * @var string
+     * @var string method for searching
      */
     public $method;
 

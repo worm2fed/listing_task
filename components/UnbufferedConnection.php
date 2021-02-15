@@ -54,11 +54,9 @@ class UnbufferedConnection
     }
 
     /**
-     * Method to get connection
-     * 
-     * @return Connection
+     * @return Connection database connection
      */
-    public static function getInstance(): Connection
+    public static function getConnection(): Connection
     {
         if (self::$connection != null) {
             return self::$connection;
